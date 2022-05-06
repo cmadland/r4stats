@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.19)  5 MAY 2022 20:15
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.19)  5 MAY 2022 20:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**_main.tex
-(./_main.tex
+**r4Stats.tex
+(./r4Stats.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-04-10> (/Users/cmadland/Library/TinyTeX/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
@@ -413,8 +413,8 @@ Package: amsthm 2020/05/29 v2.20.6
 \c@example=\count323
 \c@exercise=\count324
 \c@hypothesis=\count325
-(./_main.aux)
-\openout1 = `_main.aux'.
+(./r4Stats.aux)
+\openout1 = `r4Stats.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 139.
 LaTeX Font Info:    ... okay on input line 139.
@@ -681,9 +681,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 139.
 LaTeX Info: Redefining \pageref on input line 139.
 LaTeX Info: Redefining \nameref on input line 139.
-(./_main.out) (./_main.out)
+(./r4Stats.out) (./r4Stats.out)
 \@outlinefile=\write4
-\openout4 = `_main.out'.
+\openout4 = `r4Stats.out'.
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 12.0pt on input line 141.
@@ -719,7 +719,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [2
 
-] (./_main.toc
+] (./r4Stats.toc
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 7.0pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
@@ -738,7 +738,7 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 2.
 )
 \tf@toc=\write5
-\openout5 = `_main.toc'.
+\openout5 = `r4Stats.toc'.
 
 [3] [4]
 Chapter 1.
@@ -763,8 +763,8 @@ Underfull \hbox (badness 2512) in paragraph at lines 234--235
  []
 
 [9]
-File: _main_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/nice-fig-1.pdf>
+File: r4Stats_files/figure-latex/nice-fig-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/nice-fig-1.pdf>
 [10] [11] [12
 
 ]
@@ -789,23 +789,23 @@ Chapter 6.
 
 ]
 Chapter 7.
-[19] (./_main.bbl [20])
+[19] (./r4Stats.bbl [20])
 
 Package natbib Warning: There were undefined citations.
 
 [21
 
-] (./_main.aux)
-Package rerunfilecheck Info: File `_main.out' has not changed.
+] (./r4Stats.aux)
+Package rerunfilecheck Info: File `r4Stats.out' has not changed.
 (rerunfilecheck)             Checksum: 4D6492D6ABE5679F8E626BFD0BDC8216;2501.
  ) 
 Here is how much of TeX's memory you used:
  17549 strings out of 478155
- 321189 string characters out of 5853289
- 765856 words of memory out of 5000000
+ 321259 string characters out of 5853289
+ 765862 words of memory out of 5000000
  37944 multiletter control sequences out of 15000+600000
  475750 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 86i,8n,121p,378b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,8n,121p,380b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on _main.pdf (21 pages).
+Output written on r4Stats.pdf (21 pages).

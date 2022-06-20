@@ -1,34 +1,93 @@
-# Cross-references {#cross}
+# Univariate data {#univariate}
 
-Cross-references make it easier for your readers to find and link to elements in your book.
+## Levels of measurement {-}
 
-## Chapters and sub-chapters
+The view in most textbooks is from Stanley Smith Stevens (1964)
+::: {.definition}
+**Nominal**  
+Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
+:::
 
-There are two steps to cross-reference any heading:
+::: {.definition}
+**Ordinal**  
+Ordinal data is data with some order, so that we can sort the data from largest to smallest. An example might be the place a runner takes in a race.
+:::
 
-1. Label the heading: `# Hello world {#nice-label}`. 
-    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
-    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
+::: {.definition}
+**Interval**  
+Interval data is ordinal data where the difference between two values has some interpretation. The clock time a person finishes might be an example. If we know runner a finishes at noon and runner B at 1PM then we know that runner B took longer. Since we haven’t specified when they started, we don’t know what percent longer though.
+:::
 
-1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
-    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
+::: {.definition}
+**Ratio**  
+Ration data has a meaningful 0. If we record not the time of finishing, but the time since starting, then 0 has a meaning and we can take a ration of the total time for runner A and B to compare the two.
+:::
 
-## Captioned figures and tables
+However, working with data on a computer is different, requiring different categories...
 
-Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
+::: {.definition}
+**Factor**  
+When we look at many variables, some may simply record categories used to group the data. In R we will use *factors* to store these variables. An example might be the browser a user has used to view a website, as gleaned from a log.
+:::
 
-See Figure \@ref(fig:nice-fig).
+::: {.definition}
+**character**  
+Some categorical data are factors, but others are really just identifiers, and are not used for grouping. An example might be a user’s IP address. Difference can be thought of as distinguishing between *categorizing* a case or *characterizing* a case. While both factor and categorical data are *nominal*, we keep the distinction as we will interact with the data differently.
+:::
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+::: {.definition}
+**discrete**  
+Discrete data comes from measurements where there are essentially only distinct and separate possible values that can be counted. For example, the number of visits a person makes to a website will always be integer data, as will other counting data.
+:::
+
+::: {.definition}
+**continuous**  
+Data which could conceivably come from a continuum of variables. The recording of time in milliseconds of a visit to a website might be such data. A useful distinction is that for discrete data we expect that cases will share values, whereas for continuous data this will be impossible, or at least very unlikely. We can also turn continuous data into discrete data by truncating (record the minute instead of the millisecond) or by binning.Rather than draw distinctions between ordinal, interval, and ratio, it is more important for statistical theory - in finding a model for the recorded data - to know if the data is discrete or continuous.
+:::
+
+::: {.definition}
+**time and date**  
+Though we just saw that time and date can be considered continuous or discrete, for computers there are often separate ways to handle date and time data. Issues that complicate matters are leap days and time zones, but also scale (some people want millisecond data)
+:::
+
+::: {.definition}
+**hierarchical**  
+while much data is several measurements for several cases and fits nicely onto a rectangular spreadsheet, data on networks does not fit this
+:::
+
+## Data Vectors
+
+Suppose the number of whale beachings in Texas during the 1990s was
+
+`74 122 235 111 292 111 211 133 156 79`
+
+We can combine these into a data set through
+
+```{R}
+whale <- c(74, 122, 235, 111, 292, 111, 211, 133, 156, 79)
 ```
 
-Don't miss Table \@ref(tab:nice-tab).
+ The `whale` object is a *data vector*.
 
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(pressure, 10), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+the size of the data set is retreived with the `length` function
+
+```{R}
+length(whale)
 ```
+
+```{R}
+sum(whale)
+```
+
+Average can be found with combining the two...
+
+```{R}
+sum(whale)/length(whale)
+```
+or
+
+```{R}
+mean(whale)
+```
+
+### Vectorization

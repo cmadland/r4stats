@@ -1,11 +1,57 @@
-# Hello bookdown 
+# Getting Started with R
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
+## Problems
 
-## A section
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
 
-### An unnumbered section {-}
+```{R}
+1+2*(3+4)
+```
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+
+
+```{R}
+(4^3)+(3^(2+1))
+```
+ 
+```{R}
+sqrt(4+3)*(2+1)
+```
+
+```{R}
+(1+(2*3^4))/(5/6)-7
+```
+
+```{R}
+(0.25 - 0.2) / (0.2 * (1 - 0.2)/100)^(1/2)
+```
+
+```{R}
+x <- 2
+y <- 3
+z <- 4
+w <- 5
+
+x*y*z*w
+```
+
+
+```{R}
+rivers
+```
+
+
+```{R}
+
+Orange
+```
+
+
+```{R}
+mean(Orange$age)
+```
+
+
+```{R}
+max(Orange$circumference)
+```

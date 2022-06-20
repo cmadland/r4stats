@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Footnotes and citations | R4Stats</title>
+  <title>Chapter 1 Getting Started with R | R4Stats</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.25.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Footnotes and citations | R4Stats" />
+  <meta property="og:title" content="Chapter 1 Getting Started with R | R4Stats" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="cmadland/r4stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Footnotes and citations | R4Stats" />
+  <meta name="twitter:title" content="Chapter 1 Getting Started with R | R4Stats" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="parts.html"/>
-<link rel="next" href="blocks.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="univariate.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,40 +221,89 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="footnotes-and-citations" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="footnotes" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Footnotes<a href="footnotes-and-citations.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
-</div>
-<div id="citations" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Citations<a href="footnotes-and-citations.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref"><strong>R-bookdown?</strong></a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+<div id="getting-started-with-r" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Getting Started with R<a href="getting-started-with-r.html#getting-started-with-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="problems" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Problems<a href="getting-started-with-r.html#problems" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="getting-started-with-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>(<span class="dv">3</span><span class="sc">+</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 15</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="getting-started-with-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4</span><span class="sc">^</span><span class="dv">3</span>)<span class="sc">+</span>(<span class="dv">3</span><span class="sc">^</span>(<span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## [1] 91</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="getting-started-with-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">4</span><span class="sc">+</span><span class="dv">3</span>)<span class="sc">*</span>(<span class="dv">2</span><span class="sc">+</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 7.937254</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="getting-started-with-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">^</span><span class="dv">4</span>))<span class="sc">/</span>(<span class="dv">5</span><span class="sc">/</span><span class="dv">6</span>)<span class="sc">-</span><span class="dv">7</span></span></code></pre></div>
+<pre><code>## [1] 188.6</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="getting-started-with-r.html#cb11-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.25</span> <span class="sc">-</span> <span class="fl">0.2</span>) <span class="sc">/</span> (<span class="fl">0.2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.2</span>)<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 1.25</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="getting-started-with-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb13-2"><a href="getting-started-with-r.html#cb13-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-3"><a href="getting-started-with-r.html#cb13-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb13-4"><a href="getting-started-with-r.html#cb13-4" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb13-5"><a href="getting-started-with-r.html#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="getting-started-with-r.html#cb13-6" aria-hidden="true" tabindex="-1"></a>x<span class="sc">*</span>y<span class="sc">*</span>z<span class="sc">*</span>w</span></code></pre></div>
+<pre><code>## [1] 120</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="getting-started-with-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a>rivers</span></code></pre></div>
+<pre><code>##   [1]  735  320  325  392  524  450 1459  135  465  600  330  336  280  315  870
+##  [16]  906  202  329  290 1000  600  505 1450  840 1243  890  350  407  286  280
+##  [31]  525  720  390  250  327  230  265  850  210  630  260  230  360  730  600
+##  [46]  306  390  420  291  710  340  217  281  352  259  250  470  680  570  350
+##  [61]  300  560  900  625  332 2348 1171 3710 2315 2533  780  280  410  460  260
+##  [76]  255  431  350  760  618  338  981 1306  500  696  605  250  411 1054  735
+##  [91]  233  435  490  310  460  383  375 1270  545  445 1885  380  300  380  377
+## [106]  425  276  210  800  420  350  360  538 1100 1205  314  237  610  360  540
+## [121] 1038  424  310  300  444  301  268  620  215  652  900  525  246  360  529
+## [136]  500  720  270  430  671 1770</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="getting-started-with-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a>Orange</span></code></pre></div>
+<pre><code>##    Tree  age circumference
+## 1     1  118            30
+## 2     1  484            58
+## 3     1  664            87
+## 4     1 1004           115
+## 5     1 1231           120
+## 6     1 1372           142
+## 7     1 1582           145
+## 8     2  118            33
+## 9     2  484            69
+## 10    2  664           111
+## 11    2 1004           156
+## 12    2 1231           172
+## 13    2 1372           203
+## 14    2 1582           203
+## 15    3  118            30
+## 16    3  484            51
+## 17    3  664            75
+## 18    3 1004           108
+## 19    3 1231           115
+## 20    3 1372           139
+## 21    3 1582           140
+## 22    4  118            32
+## 23    4  484            62
+## 24    4  664           112
+## 25    4 1004           167
+## 26    4 1231           179
+## 27    4 1372           209
+## 28    4 1582           214
+## 29    5  118            30
+## 30    5  484            49
+## 31    5  664            81
+## 32    5 1004           125
+## 33    5 1231           142
+## 34    5 1372           174
+## 35    5 1582           177</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="getting-started-with-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Orange<span class="sc">$</span>age)</span></code></pre></div>
+<pre><code>## [1] 922.1429</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="getting-started-with-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(Orange<span class="sc">$</span>circumference)</span></code></pre></div>
+<pre><code>## [1] 214</code></pre>
 
 </div>
-</div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a footnote.<a href="footnotes-and-citations.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="parts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="univariate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +334,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cmadland/r4stats/edit/main/04-citations.Rmd",
+"link": "https://github.com/cmadland/r4stats/edit/main/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {

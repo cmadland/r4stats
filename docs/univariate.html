@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Footnotes and citations | R4Stats</title>
+  <title>Chapter 2 Univariate data | R4Stats</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.25.5 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Footnotes and citations | R4Stats" />
+  <meta property="og:title" content="Chapter 2 Univariate data | R4Stats" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="cmadland/r4stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Footnotes and citations | R4Stats" />
+  <meta name="twitter:title" content="Chapter 2 Univariate data | R4Stats" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -36,8 +36,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="parts.html"/>
-<link rel="next" href="blocks.html"/>
+<link rel="prev" href="getting-started-with-r.html"/>
+<link rel="next" href="parts.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,40 +221,84 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="footnotes-and-citations" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="footnotes" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Footnotes<a href="footnotes-and-citations.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div id="univariate" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Univariate data<a href="univariate.html#univariate" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="levels-of-measurement" class="section level2 unnumbered hasAnchor">
+<h2>Levels of measurement<a href="univariate.html#levels-of-measurement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The view in most textbooks is from Stanley Smith Stevens (1964)
+::: {.definition}
+<strong>Nominal</strong><br />
+Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
+:::</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-1" class="definition"><strong>Definition 2.1  </strong></span><strong>Ordinal</strong><br />
+Ordinal data is data with some order, so that we can sort the data from largest to smallest. An example might be the place a runner takes in a race.</p>
 </div>
-<div id="citations" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Citations<a href="footnotes-and-citations.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref"><strong>R-bookdown?</strong></a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+<div class="definition">
+<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 2.2  </strong></span><strong>Interval</strong><br />
+Interval data is ordinal data where the difference between two values has some interpretation. The clock time a person finishes might be an example. If we know runner a finishes at noon and runner B at 1PM then we know that runner B took longer. Since we haven’t specified when they started, we don’t know what percent longer though.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-3" class="definition"><strong>Definition 2.3  </strong></span><strong>Ratio</strong><br />
+Ration data has a meaningful 0. If we record not the time of finishing, but the time since starting, then 0 has a meaning and we can take a ration of the total time for runner A and B to compare the two.</p>
+</div>
+<p>However, working with data on a computer is different, requiring different categories…</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 2.4  </strong></span><strong>Factor</strong><br />
+When we look at many variables, some may simply record categories used to group the data. In R we will use <em>factors</em> to store these variables. An example might be the browser a user has used to view a website, as gleaned from a log.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 2.5  </strong></span><strong>character</strong><br />
+Some categorical data are factors, but others are really just identifiers, and are not used for grouping. An example might be a user’s IP address. Difference can be thought of as distinguishing between <em>categorizing</em> a case or <em>characterizing</em> a case. While both factor and categorical data are <em>nominal</em>, we keep the distinction as we will interact with the data differently.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.6  </strong></span><strong>discrete</strong><br />
+Discrete data comes from measurements where there are essentially only distinct and separate possible values that can be counted. For example, the number of visits a person makes to a website will always be integer data, as will other counting data.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 2.7  </strong></span><strong>continuous</strong><br />
+Data which could conceivably come from a continuum of variables. The recording of time in milliseconds of a visit to a website might be such data. A useful distinction is that for discrete data we expect that cases will share values, whereas for continuous data this will be impossible, or at least very unlikely. We can also turn continuous data into discrete data by truncating (record the minute instead of the millisecond) or by binning.Rather than draw distinctions between ordinal, interval, and ratio, it is more important for statistical theory - in finding a model for the recorded data - to know if the data is discrete or continuous.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 2.8  </strong></span><strong>time and date</strong><br />
+Though we just saw that time and date can be considered continuous or discrete, for computers there are often separate ways to handle date and time data. Issues that complicate matters are leap days and time zones, but also scale (some people want millisecond data)</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-9" class="definition"><strong>Definition 2.9  </strong></span><strong>hierarchical</strong><br />
+while much data is several measurements for several cases and fits nicely onto a rectangular spreadsheet, data on networks does not fit this</p>
+</div>
+</div>
+<div id="data-vectors" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Data Vectors<a href="univariate.html#data-vectors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Suppose the number of whale beachings in Texas during the 1990s was</p>
+<p><code>74 122 235 111 292 111 211 133 156 79</code></p>
+<p>We can combine these into a data set through</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="univariate.html#cb23-1" aria-hidden="true" tabindex="-1"></a>whale <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">74</span>, <span class="dv">122</span>, <span class="dv">235</span>, <span class="dv">111</span>, <span class="dv">292</span>, <span class="dv">111</span>, <span class="dv">211</span>, <span class="dv">133</span>, <span class="dv">156</span>, <span class="dv">79</span>)</span></code></pre></div>
+<p>The <code>whale</code> object is a <em>data vector</em>.</p>
+<p>the size of the data set is retreived with the <code>length</code> function</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="univariate.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(whale)</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="univariate.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(whale)</span></code></pre></div>
+<pre><code>## [1] 1524</code></pre>
+<p>Average can be found with combining the two…</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="univariate.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(whale)<span class="sc">/</span><span class="fu">length</span>(whale)</span></code></pre></div>
+<pre><code>## [1] 152.4</code></pre>
+<p>or</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="univariate.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(whale)</span></code></pre></div>
+<pre><code>## [1] 152.4</code></pre>
+<div id="vectorization" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Vectorization<a href="univariate.html#vectorization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
-<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>This is a footnote.<a href="footnotes-and-citations.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="parts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -285,7 +329,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/cmadland/r4stats/edit/main/04-citations.Rmd",
+"link": "https://github.com/cmadland/r4stats/edit/main/02-cross-refs.Rmd",
 "text": "Edit"
 },
 "history": {

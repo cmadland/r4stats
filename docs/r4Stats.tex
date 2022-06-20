@@ -117,7 +117,7 @@
 
 \title{R4Stats}
 \author{Colin Madland}
-\date{2022-05-05}
+\date{2022-06-19}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -144,12 +144,14 @@
 \tableofcontents
 }
 \hypertarget{about}{%
-\chapter{About}\label{about}}
+\chapter*{About}\label{about}}
+\addcontentsline{toc}{chapter}{About}
 
 This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
 
 \hypertarget{usage}{%
-\section{Usage}\label{usage}}
+\section*{Usage}\label{usage}}
+\addcontentsline{toc}{section}{Usage}
 
 Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
 
@@ -158,7 +160,8 @@ Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ shor
 The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
 
 \hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
+\section*{Render book}\label{render-book}}
+\addcontentsline{toc}{section}{Render book}
 
 You can render the HTML version of this example book without changing anything:
 
@@ -181,7 +184,8 @@ Or build the book from the R console:
 To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
 
 \hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
+\section*{Preview book}\label{preview-book}}
+\addcontentsline{toc}{section}{Preview book}
 
 As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
 
@@ -191,111 +195,286 @@ As you work, you may start a local server to live preview this HTML book. This p
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
+\hypertarget{getting-started-with-r}{%
+\chapter{Getting Started with R}\label{getting-started-with-r}}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
-
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
-
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
-
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
-
-There are two steps to cross-reference any heading:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
-  \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
-  \end{itemize}
-\item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
-\end{enumerate}
-
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
-
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tab:chunk-label)}, respectively.
-
-See Figure \ref{fig:nice-fig}.
+\hypertarget{problems}{%
+\section{Problems}\label{problems}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\DecValTok{1}\SpecialCharTok{+}\DecValTok{2}\SpecialCharTok{*}\NormalTok{(}\DecValTok{3}\SpecialCharTok{+}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{r4Stats_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Don't miss Table \ref{tab:nice-tab}.
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\NormalTok{(}\DecValTok{4}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{)}\SpecialCharTok{+}\NormalTok{(}\DecValTok{3}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{2}\SpecialCharTok{+}\DecValTok{1}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{verbatim}
+## [1] 91
+\end{verbatim}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{4}\SpecialCharTok{+}\DecValTok{3}\NormalTok{)}\SpecialCharTok{*}\NormalTok{(}\DecValTok{2}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.937254
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{(}\DecValTok{2}\SpecialCharTok{*}\DecValTok{3}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{))}\SpecialCharTok{/}\NormalTok{(}\DecValTok{5}\SpecialCharTok{/}\DecValTok{6}\NormalTok{)}\SpecialCharTok{{-}}\DecValTok{7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 188.6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FloatTok{0.25} \SpecialCharTok{{-}} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (}\FloatTok{0.2} \SpecialCharTok{*}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{{-}} \FloatTok{0.2}\NormalTok{)}\SpecialCharTok{/}\DecValTok{100}\NormalTok{)}\SpecialCharTok{\^{}}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{3}
+\NormalTok{z }\OtherTok{\textless{}{-}} \DecValTok{4}
+\NormalTok{w }\OtherTok{\textless{}{-}} \DecValTok{5}
+
+\NormalTok{x}\SpecialCharTok{*}\NormalTok{y}\SpecialCharTok{*}\NormalTok{z}\SpecialCharTok{*}\NormalTok{w}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 120
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rivers}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]  735  320  325  392  524  450 1459  135  465  600  330  336  280  315  870
+##  [16]  906  202  329  290 1000  600  505 1450  840 1243  890  350  407  286  280
+##  [31]  525  720  390  250  327  230  265  850  210  630  260  230  360  730  600
+##  [46]  306  390  420  291  710  340  217  281  352  259  250  470  680  570  350
+##  [61]  300  560  900  625  332 2348 1171 3710 2315 2533  780  280  410  460  260
+##  [76]  255  431  350  760  618  338  981 1306  500  696  605  250  411 1054  735
+##  [91]  233  435  490  310  460  383  375 1270  545  445 1885  380  300  380  377
+## [106]  425  276  210  800  420  350  360  538 1100 1205  314  237  610  360  540
+## [121] 1038  424  310  300  444  301  268  620  215  652  900  525  246  360  529
+## [136]  500  720  270  430  671 1770
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Orange}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Tree  age circumference
+## 1     1  118            30
+## 2     1  484            58
+## 3     1  664            87
+## 4     1 1004           115
+## 5     1 1231           120
+## 6     1 1372           142
+## 7     1 1582           145
+## 8     2  118            33
+## 9     2  484            69
+## 10    2  664           111
+## 11    2 1004           156
+## 12    2 1231           172
+## 13    2 1372           203
+## 14    2 1582           203
+## 15    3  118            30
+## 16    3  484            51
+## 17    3  664            75
+## 18    3 1004           108
+## 19    3 1231           115
+## 20    3 1372           139
+## 21    3 1582           140
+## 22    4  118            32
+## 23    4  484            62
+## 24    4  664           112
+## 25    4 1004           167
+## 26    4 1231           179
+## 27    4 1372           209
+## 28    4 1582           214
+## 29    5  118            30
+## 30    5  484            49
+## 31    5  664            81
+## 32    5 1004           125
+## 33    5 1231           142
+## 34    5 1372           174
+## 35    5 1582           177
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(Orange}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 922.1429
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{max}\NormalTok{(Orange}\SpecialCharTok{$}\NormalTok{circumference)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 214
+\end{verbatim}
+
+\hypertarget{univariate}{%
+\chapter{Univariate data}\label{univariate}}
+
+\hypertarget{levels-of-measurement}{%
+\section*{Levels of measurement}\label{levels-of-measurement}}
+\addcontentsline{toc}{section}{Levels of measurement}
+
+The view in most textbooks is from Stanley Smith Stevens (1964)
+::: \{.definition\}
+\textbf{Nominal}\\
+Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
+:::
+
+\begin{definition}
+\textbf{Ordinal}\\
+Ordinal data is data with some order, so that we can sort the data from largest to smallest. An example might be the place a runner takes in a race.
+\end{definition}
+
+\begin{definition}
+\textbf{Interval}\\
+Interval data is ordinal data where the difference between two values has some interpretation. The clock time a person finishes might be an example. If we know runner a finishes at noon and runner B at 1PM then we know that runner B took longer. Since we haven't specified when they started, we don't know what percent longer though.
+\end{definition}
+
+\begin{definition}
+\textbf{Ratio}\\
+Ration data has a meaningful 0. If we record not the time of finishing, but the time since starting, then 0 has a meaning and we can take a ration of the total time for runner A and B to compare the two.
+\end{definition}
+
+However, working with data on a computer is different, requiring different categories\ldots{}
+
+\begin{definition}
+\textbf{Factor}\\
+When we look at many variables, some may simply record categories used to group the data. In R we will use \emph{factors} to store these variables. An example might be the browser a user has used to view a website, as gleaned from a log.
+\end{definition}
+
+\begin{definition}
+\textbf{character}\\
+Some categorical data are factors, but others are really just identifiers, and are not used for grouping. An example might be a user's IP address. Difference can be thought of as distinguishing between \emph{categorizing} a case or \emph{characterizing} a case. While both factor and categorical data are \emph{nominal}, we keep the distinction as we will interact with the data differently.
+\end{definition}
+
+\begin{definition}
+\textbf{discrete}\\
+Discrete data comes from measurements where there are essentially only distinct and separate possible values that can be counted. For example, the number of visits a person makes to a website will always be integer data, as will other counting data.
+\end{definition}
+
+\begin{definition}
+\textbf{continuous}\\
+Data which could conceivably come from a continuum of variables. The recording of time in milliseconds of a visit to a website might be such data. A useful distinction is that for discrete data we expect that cases will share values, whereas for continuous data this will be impossible, or at least very unlikely. We can also turn continuous data into discrete data by truncating (record the minute instead of the millisecond) or by binning.Rather than draw distinctions between ordinal, interval, and ratio, it is more important for statistical theory - in finding a model for the recorded data - to know if the data is discrete or continuous.
+\end{definition}
+
+\begin{definition}
+\textbf{time and date}\\
+Though we just saw that time and date can be considered continuous or discrete, for computers there are often separate ways to handle date and time data. Issues that complicate matters are leap days and time zones, but also scale (some people want millisecond data)
+\end{definition}
+
+\begin{definition}
+\textbf{hierarchical}\\
+while much data is several measurements for several cases and fits nicely onto a rectangular spreadsheet, data on networks does not fit this
+\end{definition}
+
+\hypertarget{data-vectors}{%
+\section{Data Vectors}\label{data-vectors}}
+
+Suppose the number of whale beachings in Texas during the 1990s was
+
+\texttt{74\ 122\ 235\ 111\ 292\ 111\ 211\ 133\ 156\ 79}
+
+We can combine these into a data set through
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{whale }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{74}\NormalTok{, }\DecValTok{122}\NormalTok{, }\DecValTok{235}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{292}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{211}\NormalTok{, }\DecValTok{133}\NormalTok{, }\DecValTok{156}\NormalTok{, }\DecValTok{79}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{whale} object is a \emph{data vector}.
+
+the size of the data set is retreived with the \texttt{length} function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1524
+\end{verbatim}
+
+Average can be found with combining the two\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(whale)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 152.4
+\end{verbatim}
+
+or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 152.4
+\end{verbatim}
+
+\hypertarget{vectorization}{%
+\subsection{Vectorization}\label{vectorization}}
 
 \hypertarget{parts}{%
 \chapter{Parts}\label{parts}}

@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Colin Madland" />
 
 
-<meta name="date" content="2022-06-19" />
+<meta name="date" content="2022-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,6 +288,13 @@ while much data is several measurements for several cases and fits nicely onto a
 <pre><code>## [1] 152.4</code></pre>
 <div id="vectorization" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Vectorization<a href="univariate.html#vectorization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="univariate.html#cb32-1" aria-hidden="true" tabindex="-1"></a>whale <span class="sc">-</span> <span class="fu">mean</span>(whale)</span></code></pre></div>
+<pre><code>##  [1] -78.4 -30.4  82.6 -41.4 139.6 -41.4  58.6 -19.4   3.6 -73.4</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="univariate.html#cb34-1" aria-hidden="true" tabindex="-1"></a>whale<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">length</span>(whale)</span></code></pre></div>
+<pre><code>##  [1]  547.6 1488.4 5522.5 1232.1 8526.4 1232.1 4452.1 1768.9 2433.6  624.1</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="univariate.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(whale)</span></code></pre></div>
+<pre><code>##  [1]  8.602325 11.045361 15.329710 10.535654 17.088007 10.535654 14.525839
+##  [8] 11.532563 12.489996  8.888194</code></pre>
 
 </div>
 </div>

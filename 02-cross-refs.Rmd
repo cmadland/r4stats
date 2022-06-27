@@ -91,3 +91,17 @@ mean(whale)
 ```
 
 ### Vectorization
+
+The arithmetic operations and the mathematical functions are vectorized, in that they will be called for each element in a data vector.
+
+```{R}
+whale - mean(whale)
+```
+
+```{R}
+whale^2 / length(whale)
+```
+
+```{R}
+sqrt(whale)
+```

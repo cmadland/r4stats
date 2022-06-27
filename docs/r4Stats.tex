@@ -117,7 +117,7 @@
 
 \title{R4Stats}
 \author{Colin Madland}
-\date{2022-06-19}
+\date{2022-06-26}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -475,6 +475,37 @@ or
 
 \hypertarget{vectorization}{%
 \subsection{Vectorization}\label{vectorization}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{whale }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] -78.4 -30.4  82.6 -41.4 139.6 -41.4  58.6 -19.4   3.6 -73.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{whale}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{/} \FunctionTok{length}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  547.6 1488.4 5522.5 1232.1 8526.4 1232.1 4452.1 1768.9 2433.6  624.1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sqrt}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  8.602325 11.045361 15.329710 10.535654 17.088007 10.535654 14.525839
+##  [8] 11.532563 12.489996  8.888194
+\end{verbatim}
 
 \hypertarget{parts}{%
 \chapter{Parts}\label{parts}}

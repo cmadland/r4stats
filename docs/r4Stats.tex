@@ -117,7 +117,7 @@
 
 \title{R4Stats}
 \author{Colin Madland}
-\date{2022-06-26}
+\date{2023-03-03}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -358,10 +358,11 @@ As you work, you may start a local server to live preview this HTML book. This p
 \addcontentsline{toc}{section}{Levels of measurement}
 
 The view in most textbooks is from Stanley Smith Stevens (1964)
-::: \{.definition\}
+
+\begin{definition}
 \textbf{Nominal}\\
 Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
-:::
+\end{definition}
 
 \begin{definition}
 \textbf{Ordinal}\\
@@ -476,6 +477,8 @@ or
 \hypertarget{vectorization}{%
 \subsection{Vectorization}\label{vectorization}}
 
+The arithmetic operations and the mathematical functions are vectorized, in that they will be called for each element in a data vector.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{whale }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(whale)}
@@ -506,6 +509,403 @@ or
 ##  [1]  8.602325 11.045361 15.329710 10.535654 17.088007 10.535654 14.525839
 ##  [8] 11.532563 12.489996  8.888194
 \end{verbatim}
+
+\hypertarget{missing-values}{%
+\subsection{Missing values}\label{missing-values}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hipcost }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{10500}\NormalTok{, }\DecValTok{45000}\NormalTok{, }\DecValTok{74100}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{83500}\NormalTok{, }\DecValTok{86000}\NormalTok{, }\DecValTok{38200}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{44300}\NormalTok{, }\DecValTok{12500}\NormalTok{, }\DecValTok{55700}\NormalTok{, }\DecValTok{43900}\NormalTok{, }\DecValTok{71900}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{62000}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+NA is interpreted as a missing value, but which may have meaning, so it is not 0
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(hipcost)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  leads to NA
+\item
+  solution is to use na.rm
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(hipcost, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 627600
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(hipcost, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 52300
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  multivariate datasets have more options related to NA values
+\end{itemize}
+
+\hypertarget{attributes-names}{%
+\subsection{Attributes: names}\label{attributes-names}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(precip)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Mobile      Juneau     Phoenix Little Rock Los Angeles  Sacramento 
+##        67.0        54.7         7.0        48.5        14.0        17.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\FunctionTok{sort}\NormalTok{(precip, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Mobile        Miami     San Juan  New Orleans       Juneau Jacksonville 
+##         67.0         59.8         59.2         56.8         54.7         54.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\FunctionTok{names}\NormalTok{(precip))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Mobile"      "Juneau"      "Phoenix"     "Little Rock" "Los Angeles"
+## [6] "Sacramento"
+\end{verbatim}
+
+\hypertarget{structured-data}{%
+\subsection{Structured Data}\label{structured-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(whale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{0}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(whale)}\SpecialCharTok{{-}}\DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] -1  0  1  2  3  4  5  6  7  8  9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{0}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{length}\NormalTok{(whale)}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0 1 2 3 4 5 6 7 8 9
+\end{verbatim}
+
+\ldots{}
+
+\hypertarget{numeric-summaries}{%
+\section{Numeric summaries}\label{numeric-summaries}}
+
+\hypertarget{center}{%
+\subsection{Center}\label{center}}
+
+\begin{itemize}
+\tightlist
+\item
+  most common - mean, median, mode
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wts }\OtherTok{\textless{}{-}}\NormalTok{ kid.weights}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(wts}\SpecialCharTok{$}\NormalTok{weight, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 150 150 144 131 125 108 105 100  98  94  93  90  89  87  86  85  85  80
+##  [19]  80  80  78  76  74  72  70  70  69  69  65  65  65  64  61  60  60  60
+##  [37]  59  58  55  55  55  54  53  52  52  52  52  52  50  50  50  50  50  50
+##  [55]  49  48  47  47  47  47  46  46  45  45  45  45  45  45  45  45  44  43
+##  [73]  43  43  42  42  42  42  42  41  41  41  40  40  40  40  40  40  40  40
+##  [91]  40  40  40  38  38  38  38  38  38  37  37  36  36  35  35  35  35  35
+## [109]  35  34  34  34  34  34  33  33  32  32  32  32  32  32  32  32  32  32
+## [127]  31  31  31  30  30  30  30  30  30  30  30  30  30  30  30  30  30  29
+## [145]  29  29  29  29  28  28  28  28  28  28  28  28  27  27  27  27  27  27
+## [163]  26  26  26  26  26  26  26  26  25  25  25  25  25  25  24  24  24  23
+## [181]  23  23  23  23  23  22  22  22  22  22  22  21  21  21  20  20  20  20
+## [199]  20  20  19  19  19  19  19  19  18  18  18  18  18  18  18  17  17  17
+## [217]  17  17  16  16  16  16  16  15  15  15  14  14  14  14  14  14  14  14
+## [235]  14  13  13  13  13  13  13  13  13  12  12  12  11  11  11  10
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  sample mean known as \texttt{x\ bar} or \(\bar{x}\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(wts}\SpecialCharTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 38.384
+\end{verbatim}
+
+\hypertarget{spread}{%
+\subsection{Spread}\label{spread}}
+
+\begin{itemize}
+\tightlist
+\item
+  variability of the data
+\end{itemize}
+
+\hypertarget{sample-variance}{%
+\subsubsection{\texorpdfstring{\texttt{sample\ variance}}{sample variance}}\label{sample-variance}}
+
+\[
+s^2=\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{var}\NormalTok{(wts}\SpecialCharTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 615.3781
+\end{verbatim}
+
+\hypertarget{sample-standard-deviation}{%
+\subsubsection{\texorpdfstring{Sample \texttt{standard\ deviation}}{Sample standard deviation}}\label{sample-standard-deviation}}
+
+\[
+\sqrt{s^2}=\sqrt{\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sd}\NormalTok{(hipcost, }\AttributeTok{na.rm=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24848.85
+\end{verbatim}
+
+\hypertarget{z-score}{%
+\subsubsection{\texorpdfstring{\texttt{z-score}}{z-score}}\label{z-score}}
+
+\begin{itemize}
+\tightlist
+\item
+  deviations, \(d_i=x_i-\bar{x}\), express data relative to its centre, rather than absolute
+  \[
+  z-score=\frac{x_i-\bar{x}}{s}
+  \]
+  gives the size of the data point in terms of its relative position to centre on a scale of standard deviations, so z-score of 3 means the data point is 3sd larger than mean
+\end{itemize}
+
+\hypertarget{defining-function}{%
+\subsubsection{defining function}\label{defining-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z\_score }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)(x}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{z\_score}\NormalTok{(wts}\SpecialCharTok{$}\NormalTok{weight)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] -0.01547962  1.95978406  0.46825843  2.40321060  0.34732391 -0.33797165
+##   [7] -0.57984067  0.26670091  4.25753976 -0.57984067  0.06514339 -0.94264420
+##  [13] -0.74108668 -1.14420172 -0.78139819 -0.37828315  1.67760353 -0.74108668
+##  [19] -0.41859465 -0.57984067 -0.13641413 -0.33797165  0.54888143  1.35511150
+##  [25] -0.41859465 -0.98295570 -0.82170969 -1.10389021 -0.29766014 -0.41859465
+##  [31] -0.29766014 -0.98295570 -0.01547962 -0.94264420 -0.45890616  0.87137346
+##  [37]  0.06514339  0.06514339 -0.70077518  0.34732391  0.30701241 -0.33797165
+##  [43]  1.23417699  1.51635752 -0.90233270 -1.10389021 -0.01547962 -0.53952916
+##  [49] -0.37828315 -0.70077518 -0.09610262 -0.41859465  0.10545489 -1.02326721
+##  [55] -0.70077518 -0.21703714  0.06514339 -0.25734864 -0.45890616 -0.74108668
+##  [61] -0.33797165  0.26670091 -0.17672563 -0.78139819  0.10545489  0.06514339
+##  [67] -0.78139819 -0.98295570  0.18607790  2.08071857  0.26670091 -0.37828315
+##  [73]  2.68539112  2.24196458 -0.66046367  1.23417699 -0.86202119 -0.45890616
+##  [79] -1.06357871  0.06514339 -0.53952916 -1.02326721 -0.74108668 -0.90233270
+##  [85]  0.26670091 -0.45890616 -0.74108668  0.62950444  0.87137346 -0.33797165
+##  [91] -0.82170969  0.66981594 -0.98295570 -0.17672563  0.26670091  0.38763542
+##  [97] -0.33797165 -0.53952916 -0.01547962 -1.02326721 -0.66046367 -0.78139819
+## [103]  1.43573451 -0.33797165  2.04040706 -0.13641413 -0.21703714  1.59698053
+## [109]  0.18607790  0.06514339 -0.25734864 -0.29766014 -0.94264420 -0.78139819
+## [115]  0.66981594  0.06514339 -0.05579112 -0.17672563  0.26670091  0.22638940
+## [121]  0.46825843  0.46825843 -0.41859465 -0.25734864 -0.66046367  0.54888143
+## [127]  0.06514339  0.14576640 -0.66046367 -0.62015217 -0.90233270 -0.86202119
+## [133] -0.33797165  0.06514339 -0.25734864 -0.49921766 -0.33797165  0.91168496
+## [139]  1.07293098  0.54888143 -0.62015217 -0.37828315 -0.82170969 -0.25734864
+## [145]  0.46825843 -1.02326721 -0.09610262  0.34732391  1.67760353 -0.62015217
+## [151]  1.03261948  0.26670091 -0.53952916  1.07293098 -0.49921766 -0.01547962
+## [157] -0.74108668  4.49940878  0.14576640  0.58919294 -0.13641413 -0.90233270
+## [163]  4.49940878 -0.53952916 -0.33797165  0.54888143 -0.45890616 -0.45890616
+## [169] -0.66046367 -0.33797165 -0.13641413  0.14576640 -1.06357871  0.34732391
+## [175] -0.98295570 -0.25734864 -0.53952916  2.20165308 -0.33797165  0.83106196
+## [181]  2.48383360 -0.17672563  0.54888143  0.18607790 -0.25734864 -1.02326721
+## [187] -0.82170969 -0.01547962 -0.86202119  0.30701241 -0.37828315  0.46825843
+## [193] -0.98295570 -1.02326721 -0.49921766 -1.10389021 -0.25734864  1.27448850
+## [199] -0.90233270  0.46825843 -0.49921766 -0.62015217 -0.05579112  0.87137346
+## [205]  0.26670091 -0.49921766  3.73349022 -0.66046367 -1.06357871  1.27448850
+## [211]  1.91947255 -0.13641413 -0.98295570  1.87916105  0.79075045 -0.41859465
+## [217] -0.86202119 -0.17672563 -0.78139819 -1.02326721 -0.82170969 -0.62015217
+## [223] -0.86202119 -0.33797165  0.10545489 -0.33797165 -1.02326721  3.49162119
+## [229] -0.25734864 -0.82170969 -0.13641413 -0.25734864  2.80632563  0.06514339
+## [235]  0.14576640 -0.41859465 -0.49921766 -0.49921766 -0.62015217  0.14576640
+## [241] -0.41859465  0.66981594  1.07293098  1.67760353  0.42794692 -0.82170969
+## [247] -0.98295570 -0.49921766  1.87916105 -0.98295570
+\end{verbatim}
+
+Example
+
+Prof scales on z-scores and those who have z-score value of greater than 1.28, get an A
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{54}\NormalTok{, }\DecValTok{50}\NormalTok{, }\DecValTok{79}\NormalTok{, }\DecValTok{79}\NormalTok{, }\DecValTok{51}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{55}\NormalTok{, }\DecValTok{62}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{80}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}}\NormalTok{ (x}\SpecialCharTok{{-}}\FunctionTok{mean}\NormalTok{(x))}\SpecialCharTok{/}\FunctionTok{sd}\NormalTok{(x)}
+\NormalTok{x[z }\SpecialCharTok{\textgreater{}=} \FloatTok{1.28}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 100
+\end{verbatim}
+
+what score is just good enough for an A?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(x) }\SpecialCharTok{+} \FloatTok{1.28} \SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 88.91046
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  formula reverses the z-score formula is read as the score which is 1.28 SD above the mean
+\item
+  z-score allow datasets with different scales to be compared
+\end{itemize}
+
+\hypertarget{shape-distribution}{%
+\subsection{Shape (distribution)}\label{shape-distribution}}
+
+\begin{itemize}
+\tightlist
+\item
+  normal
+\end{itemize}
+
+\hypertarget{categorical-data}{%
+\section{categorical data}\label{categorical-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ babies}\SpecialCharTok{$}\NormalTok{smoke}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(x, }\AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"never"}\NormalTok{, }\StringTok{"now"}\NormalTok{, }\StringTok{"until current"}\NormalTok{, }\StringTok{"once, quit"}\NormalTok{, }\StringTok{"unknown"}\NormalTok{ ))}
+\FunctionTok{table}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## x
+##         never           now until current    once, quit       unknown 
+##           544           484            95           103            10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{out }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(x)}
+\NormalTok{prop }\OtherTok{\textless{}{-}} \DecValTok{100} \SpecialCharTok{*}\NormalTok{ out }\SpecialCharTok{/} \FunctionTok{sum}\NormalTok{(out)}
+\FunctionTok{round}\NormalTok{(prop, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## x
+##         never           now until current    once, quit       unknown 
+##         44.01         39.16          7.69          8.33          0.81
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{names}\NormalTok{(fat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "case"          "body.fat"      "body.fat.siri" "density"      
+##  [5] "age"           "weight"        "height"        "BMI"          
+##  [9] "ffweight"      "neck"          "chest"         "abdomen"      
+## [13] "hip"           "thigh"         "knee"          "ankle"        
+## [17] "bicep"         "forearm"       "wrist"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(fat}\SpecialCharTok{$}\NormalTok{wrist, fat}\SpecialCharTok{$}\NormalTok{neck)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf}
 
 \hypertarget{parts}{%
 \chapter{Parts}\label{parts}}

@@ -1,8 +1,14 @@
 # Univariate data {#univariate}
 
+```{R setup, include=FALSE}
+require(UsingR)
+```
+
+
 ## Levels of measurement {-}
 
 The view in most textbooks is from Stanley Smith Stevens (1964)
+
 ::: {.definition}
 **Nominal**  
 Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
@@ -104,4 +110,175 @@ whale^2 / length(whale)
 
 ```{R}
 sqrt(whale)
+```
+
+### Missing values
+
+```{R}
+hipcost <- c(10500, 45000, 74100, NA, 83500, 86000, 38200, NA, 44300, 12500, 55700, 43900, 71900, NA, 62000)
+```
+
+NA is interpreted as a missing value, but which may have meaning, so it is not 0
+
+```{R}
+sum(hipcost)
+```
+
+- leads to NA
+- solution is to use na.rm
+
+```{R}
+sum(hipcost, na.rm = TRUE)
+```
+
+```{R}
+mean(hipcost, na.rm = TRUE)
+```
+
+- multivariate datasets have more options related to NA values
+
+### Attributes: names
+
+```{r}
+head(precip)
+```
+```{R}
+head(sort(precip, decreasing=TRUE))
+```
+
+```{R}
+head(names(precip))
+```
+
+### Structured Data
+
+```{R}
+1:length(whale)
+```
+
+```{R}
+0:length(whale)-1
+```
+```{R}
+
+0:(length(whale)-1)
+```
+
+...
+
+## Numeric summaries
+
+### Center 
+
+- most common - mean, median, mode
+
+```{R}
+wts <- kid.weights
+```
+
+```{R}
+sort(wts$weight, decreasing = TRUE)
+```
+
+- sample mean known as `x bar` or $\bar{x}$
+
+```{R}
+mean(wts$weight)
+```
+### Spread
+
+- variability of the data
+
+#### `sample variance`
+
+$$
+s^2=\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2
+$$
+```{R}
+var(wts$weight)
+```
+
+#### Sample `standard deviation`
+
+$$
+\sqrt{s^2}=\sqrt{\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2}
+$$
+
+```{R}
+sd(hipcost, na.rm=TRUE)
+```
+
+#### `z-score`
+
+- deviations, $d_i=x_i-\bar{x}$, express data relative to its centre, rather than absolute
+$$
+z-score=\frac{x_i-\bar{x}}{s}
+$$
+gives the size of the data point in terms of its relative position to centre on a scale of standard deviations, so z-score of 3 means the data point is 3sd larger than mean
+
+#### defining function
+```{R}
+z_score <- function(x)(x-mean(x))/sd(x)
+```
+
+```{R}
+z_score(wts$weight)
+```
+
+Example 
+
+Prof scales on z-scores and those who have z-score value of greater than 1.28, get an A
+
+```{R}
+x <- c(54, 50, 79, 79, 51, 69, 55, 62, 100, 80)
+z <- (x-mean(x))/sd(x)
+x[z >= 1.28]
+```
+
+what score is just good enough for an A?
+
+```{R}
+mean(x) + 1.28 * sd(x)
+```
+
+- formula reverses the z-score formula is read as the score which is 1.28 SD above the mean
+- z-score allow datasets with different scales to be compared
+
+### Shape (distribution)
+
+- normal
+
+## categorical data
+
+
+```{R}
+x <- babies$smoke
+x <- factor(x, labels=c("never", "now", "until current", "once, quit", "unknown" ))
+table(x)
+```
+
+```{R}
+out <- table(x)
+prop <- 100 * out / sum(out)
+round(prop, digits = 2)
+```
+
+```{R}
+names(fat)
+```
+
+```{R}
+plot(fat$wrist, fat$neck)
+```
+
+or
+
+`plot(neck ~ wrist, data = fat)`
+
+```{R}
+x <- fat$wrist[1:20]; y <- fat$neck[1:20]
+plot(x, y, main = "Neck by Wrist")
+abline(v = mean(x), lty=2)
+abline(h = mean(y), lty=2)
+points(mean(x), mean(y), pch=16, cex=4, col=rgb(0,0,0, .25))
 ```

@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.25.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Footnotes and citations | R4Stats" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Colin Madland" />
 
 
-<meta name="date" content="2022-06-26" />
+<meta name="date" content="2023-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -180,7 +180,17 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="univariate.html"><a href="univariate.html#data-vectors"><i class="fa fa-check"></i><b>2.1</b> Data Vectors</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="univariate.html"><a href="univariate.html#vectorization"><i class="fa fa-check"></i><b>2.1.1</b> Vectorization</a></li>
+<li class="chapter" data-level="2.1.2" data-path="univariate.html"><a href="univariate.html#missing-values"><i class="fa fa-check"></i><b>2.1.2</b> Missing values</a></li>
+<li class="chapter" data-level="2.1.3" data-path="univariate.html"><a href="univariate.html#attributes-names"><i class="fa fa-check"></i><b>2.1.3</b> Attributes: names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="univariate.html"><a href="univariate.html#structured-data"><i class="fa fa-check"></i><b>2.1.4</b> Structured Data</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="univariate.html"><a href="univariate.html#numeric-summaries"><i class="fa fa-check"></i><b>2.2</b> Numeric summaries</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="univariate.html"><a href="univariate.html#center"><i class="fa fa-check"></i><b>2.2.1</b> Center</a></li>
+<li class="chapter" data-level="2.2.2" data-path="univariate.html"><a href="univariate.html#spread"><i class="fa fa-check"></i><b>2.2.2</b> Spread</a></li>
+<li class="chapter" data-level="2.2.3" data-path="univariate.html"><a href="univariate.html#shape-distribution"><i class="fa fa-check"></i><b>2.2.3</b> Shape (distribution)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="univariate.html"><a href="univariate.html#categorical-data"><i class="fa fa-check"></i><b>2.3</b> categorical data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>3</b> Parts</a></li>
 <li class="chapter" data-level="4" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a>
@@ -314,7 +324,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

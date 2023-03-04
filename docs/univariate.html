@@ -8,7 +8,7 @@
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.25.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Univariate data | R4Stats" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Colin Madland" />
 
 
-<meta name="date" content="2022-06-26" />
+<meta name="date" content="2023-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,7 +98,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -111,7 +111,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -180,7 +180,17 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="univariate.html"><a href="univariate.html#data-vectors"><i class="fa fa-check"></i><b>2.1</b> Data Vectors</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="univariate.html"><a href="univariate.html#vectorization"><i class="fa fa-check"></i><b>2.1.1</b> Vectorization</a></li>
+<li class="chapter" data-level="2.1.2" data-path="univariate.html"><a href="univariate.html#missing-values"><i class="fa fa-check"></i><b>2.1.2</b> Missing values</a></li>
+<li class="chapter" data-level="2.1.3" data-path="univariate.html"><a href="univariate.html#attributes-names"><i class="fa fa-check"></i><b>2.1.3</b> Attributes: names</a></li>
+<li class="chapter" data-level="2.1.4" data-path="univariate.html"><a href="univariate.html#structured-data"><i class="fa fa-check"></i><b>2.1.4</b> Structured Data</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="univariate.html"><a href="univariate.html#numeric-summaries"><i class="fa fa-check"></i><b>2.2</b> Numeric summaries</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="univariate.html"><a href="univariate.html#center"><i class="fa fa-check"></i><b>2.2.1</b> Center</a></li>
+<li class="chapter" data-level="2.2.2" data-path="univariate.html"><a href="univariate.html#spread"><i class="fa fa-check"></i><b>2.2.2</b> Spread</a></li>
+<li class="chapter" data-level="2.2.3" data-path="univariate.html"><a href="univariate.html#shape-distribution"><i class="fa fa-check"></i><b>2.2.3</b> Shape (distribution)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="univariate.html"><a href="univariate.html#categorical-data"><i class="fa fa-check"></i><b>2.3</b> categorical data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>3</b> Parts</a></li>
 <li class="chapter" data-level="4" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a>
@@ -225,46 +235,46 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 2</span> Univariate data<a href="univariate.html#univariate" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="levels-of-measurement" class="section level2 unnumbered hasAnchor">
 <h2>Levels of measurement<a href="univariate.html#levels-of-measurement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The view in most textbooks is from Stanley Smith Stevens (1964)
-::: {.definition}
-<strong>Nominal</strong><br />
-Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
-:::</p>
+<p>The view in most textbooks is from Stanley Smith Stevens (1964)</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-1" class="definition"><strong>Definition 2.1  </strong></span><strong>Ordinal</strong><br />
+<p><span id="def:unlabeled-div-1" class="definition"><strong>Definition 2.1  </strong></span><strong>Nominal</strong><br />
+Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.</p>
+</div>
+<div class="definition">
+<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 2.2  </strong></span><strong>Ordinal</strong><br />
 Ordinal data is data with some order, so that we can sort the data from largest to smallest. An example might be the place a runner takes in a race.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-2" class="definition"><strong>Definition 2.2  </strong></span><strong>Interval</strong><br />
+<p><span id="def:unlabeled-div-3" class="definition"><strong>Definition 2.3  </strong></span><strong>Interval</strong><br />
 Interval data is ordinal data where the difference between two values has some interpretation. The clock time a person finishes might be an example. If we know runner a finishes at noon and runner B at 1PM then we know that runner B took longer. Since we haven’t specified when they started, we don’t know what percent longer though.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-3" class="definition"><strong>Definition 2.3  </strong></span><strong>Ratio</strong><br />
+<p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 2.4  </strong></span><strong>Ratio</strong><br />
 Ration data has a meaningful 0. If we record not the time of finishing, but the time since starting, then 0 has a meaning and we can take a ration of the total time for runner A and B to compare the two.</p>
 </div>
 <p>However, working with data on a computer is different, requiring different categories…</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 2.4  </strong></span><strong>Factor</strong><br />
+<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 2.5  </strong></span><strong>Factor</strong><br />
 When we look at many variables, some may simply record categories used to group the data. In R we will use <em>factors</em> to store these variables. An example might be the browser a user has used to view a website, as gleaned from a log.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 2.5  </strong></span><strong>character</strong><br />
+<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.6  </strong></span><strong>character</strong><br />
 Some categorical data are factors, but others are really just identifiers, and are not used for grouping. An example might be a user’s IP address. Difference can be thought of as distinguishing between <em>categorizing</em> a case or <em>characterizing</em> a case. While both factor and categorical data are <em>nominal</em>, we keep the distinction as we will interact with the data differently.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.6  </strong></span><strong>discrete</strong><br />
+<p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 2.7  </strong></span><strong>discrete</strong><br />
 Discrete data comes from measurements where there are essentially only distinct and separate possible values that can be counted. For example, the number of visits a person makes to a website will always be integer data, as will other counting data.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 2.7  </strong></span><strong>continuous</strong><br />
+<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 2.8  </strong></span><strong>continuous</strong><br />
 Data which could conceivably come from a continuum of variables. The recording of time in milliseconds of a visit to a website might be such data. A useful distinction is that for discrete data we expect that cases will share values, whereas for continuous data this will be impossible, or at least very unlikely. We can also turn continuous data into discrete data by truncating (record the minute instead of the millisecond) or by binning.Rather than draw distinctions between ordinal, interval, and ratio, it is more important for statistical theory - in finding a model for the recorded data - to know if the data is discrete or continuous.</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-8" class="definition"><strong>Definition 2.8  </strong></span><strong>time and date</strong><br />
+<p><span id="def:unlabeled-div-9" class="definition"><strong>Definition 2.9  </strong></span><strong>time and date</strong><br />
 Though we just saw that time and date can be considered continuous or discrete, for computers there are often separate ways to handle date and time data. Issues that complicate matters are leap days and time zones, but also scale (some people want millisecond data)</p>
 </div>
 <div class="definition">
-<p><span id="def:unlabeled-div-9" class="definition"><strong>Definition 2.9  </strong></span><strong>hierarchical</strong><br />
+<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 2.10  </strong></span><strong>hierarchical</strong><br />
 while much data is several measurements for several cases and fits nicely onto a rectangular spreadsheet, data on networks does not fit this</p>
 </div>
 </div>
@@ -288,6 +298,7 @@ while much data is several measurements for several cases and fits nicely onto a
 <pre><code>## [1] 152.4</code></pre>
 <div id="vectorization" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Vectorization<a href="univariate.html#vectorization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The arithmetic operations and the mathematical functions are vectorized, in that they will be called for each element in a data vector.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="univariate.html#cb32-1" aria-hidden="true" tabindex="-1"></a>whale <span class="sc">-</span> <span class="fu">mean</span>(whale)</span></code></pre></div>
 <pre><code>##  [1] -78.4 -30.4  82.6 -41.4 139.6 -41.4  58.6 -19.4   3.6 -73.4</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="univariate.html#cb34-1" aria-hidden="true" tabindex="-1"></a>whale<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">length</span>(whale)</span></code></pre></div>
@@ -295,8 +306,199 @@ while much data is several measurements for several cases and fits nicely onto a
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="univariate.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(whale)</span></code></pre></div>
 <pre><code>##  [1]  8.602325 11.045361 15.329710 10.535654 17.088007 10.535654 14.525839
 ##  [8] 11.532563 12.489996  8.888194</code></pre>
-
 </div>
+<div id="missing-values" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Missing values<a href="univariate.html#missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="univariate.html#cb38-1" aria-hidden="true" tabindex="-1"></a>hipcost <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10500</span>, <span class="dv">45000</span>, <span class="dv">74100</span>, <span class="cn">NA</span>, <span class="dv">83500</span>, <span class="dv">86000</span>, <span class="dv">38200</span>, <span class="cn">NA</span>, <span class="dv">44300</span>, <span class="dv">12500</span>, <span class="dv">55700</span>, <span class="dv">43900</span>, <span class="dv">71900</span>, <span class="cn">NA</span>, <span class="dv">62000</span>)</span></code></pre></div>
+<p>NA is interpreted as a missing value, but which may have meaning, so it is not 0</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="univariate.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(hipcost)</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<ul>
+<li>leads to NA</li>
+<li>solution is to use na.rm</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="univariate.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(hipcost, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 627600</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="univariate.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(hipcost, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 52300</code></pre>
+<ul>
+<li>multivariate datasets have more options related to NA values</li>
+</ul>
+</div>
+<div id="attributes-names" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Attributes: names<a href="univariate.html#attributes-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="univariate.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(precip)</span></code></pre></div>
+<pre><code>##      Mobile      Juneau     Phoenix Little Rock Los Angeles  Sacramento 
+##        67.0        54.7         7.0        48.5        14.0        17.2</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="univariate.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">sort</span>(precip, <span class="at">decreasing=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>##       Mobile        Miami     San Juan  New Orleans       Juneau Jacksonville 
+##         67.0         59.8         59.2         56.8         54.7         54.5</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="univariate.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">names</span>(precip))</span></code></pre></div>
+<pre><code>## [1] &quot;Mobile&quot;      &quot;Juneau&quot;      &quot;Phoenix&quot;     &quot;Little Rock&quot; &quot;Los Angeles&quot;
+## [6] &quot;Sacramento&quot;</code></pre>
+</div>
+<div id="structured-data" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Structured Data<a href="univariate.html#structured-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="univariate.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(whale)</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="univariate.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span><span class="fu">length</span>(whale)<span class="sc">-</span><span class="dv">1</span></span></code></pre></div>
+<pre><code>##  [1] -1  0  1  2  3  4  5  6  7  8  9</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="univariate.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span><span class="sc">:</span>(<span class="fu">length</span>(whale)<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##  [1] 0 1 2 3 4 5 6 7 8 9</code></pre>
+<p>…</p>
+</div>
+</div>
+<div id="numeric-summaries" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Numeric summaries<a href="univariate.html#numeric-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="center" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Center<a href="univariate.html#center" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>most common - mean, median, mode</li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="univariate.html#cb57-1" aria-hidden="true" tabindex="-1"></a>wts <span class="ot">&lt;-</span> kid.weights</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="univariate.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(wts<span class="sc">$</span>weight, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##   [1] 150 150 144 131 125 108 105 100  98  94  93  90  89  87  86  85  85  80
+##  [19]  80  80  78  76  74  72  70  70  69  69  65  65  65  64  61  60  60  60
+##  [37]  59  58  55  55  55  54  53  52  52  52  52  52  50  50  50  50  50  50
+##  [55]  49  48  47  47  47  47  46  46  45  45  45  45  45  45  45  45  44  43
+##  [73]  43  43  42  42  42  42  42  41  41  41  40  40  40  40  40  40  40  40
+##  [91]  40  40  40  38  38  38  38  38  38  37  37  36  36  35  35  35  35  35
+## [109]  35  34  34  34  34  34  33  33  32  32  32  32  32  32  32  32  32  32
+## [127]  31  31  31  30  30  30  30  30  30  30  30  30  30  30  30  30  30  29
+## [145]  29  29  29  29  28  28  28  28  28  28  28  28  27  27  27  27  27  27
+## [163]  26  26  26  26  26  26  26  26  25  25  25  25  25  25  24  24  24  23
+## [181]  23  23  23  23  23  22  22  22  22  22  22  21  21  21  20  20  20  20
+## [199]  20  20  19  19  19  19  19  19  18  18  18  18  18  18  18  17  17  17
+## [217]  17  17  16  16  16  16  16  15  15  15  14  14  14  14  14  14  14  14
+## [235]  14  13  13  13  13  13  13  13  13  12  12  12  11  11  11  10</code></pre>
+<ul>
+<li>sample mean known as <code>x bar</code> or <span class="math inline">\(\bar{x}\)</span></li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="univariate.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wts<span class="sc">$</span>weight)</span></code></pre></div>
+<pre><code>## [1] 38.384</code></pre>
+</div>
+<div id="spread" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Spread<a href="univariate.html#spread" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>variability of the data</li>
+</ul>
+<div id="sample-variance" class="section level4 hasAnchor" number="2.2.2.1">
+<h4><span class="header-section-number">2.2.2.1</span> <code>sample variance</code><a href="univariate.html#sample-variance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[
+s^2=\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2
+\]</span></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="univariate.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(wts<span class="sc">$</span>weight)</span></code></pre></div>
+<pre><code>## [1] 615.3781</code></pre>
+</div>
+<div id="sample-standard-deviation" class="section level4 hasAnchor" number="2.2.2.2">
+<h4><span class="header-section-number">2.2.2.2</span> Sample <code>standard deviation</code><a href="univariate.html#sample-standard-deviation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><span class="math display">\[
+\sqrt{s^2}=\sqrt{\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2}
+\]</span></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="univariate.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(hipcost, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 24848.85</code></pre>
+</div>
+<div id="z-score" class="section level4 hasAnchor" number="2.2.2.3">
+<h4><span class="header-section-number">2.2.2.3</span> <code>z-score</code><a href="univariate.html#z-score" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>deviations, <span class="math inline">\(d_i=x_i-\bar{x}\)</span>, express data relative to its centre, rather than absolute
+<span class="math display">\[
+z-score=\frac{x_i-\bar{x}}{s}
+\]</span>
+gives the size of the data point in terms of its relative position to centre on a scale of standard deviations, so z-score of 3 means the data point is 3sd larger than mean</li>
+</ul>
+</div>
+<div id="defining-function" class="section level4 hasAnchor" number="2.2.2.4">
+<h4><span class="header-section-number">2.2.2.4</span> defining function<a href="univariate.html#defining-function" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="univariate.html#cb66-1" aria-hidden="true" tabindex="-1"></a>z_score <span class="ot">&lt;-</span> <span class="cf">function</span>(x)(x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">/</span><span class="fu">sd</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="univariate.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">z_score</span>(wts<span class="sc">$</span>weight)</span></code></pre></div>
+<pre><code>##   [1] -0.01547962  1.95978406  0.46825843  2.40321060  0.34732391 -0.33797165
+##   [7] -0.57984067  0.26670091  4.25753976 -0.57984067  0.06514339 -0.94264420
+##  [13] -0.74108668 -1.14420172 -0.78139819 -0.37828315  1.67760353 -0.74108668
+##  [19] -0.41859465 -0.57984067 -0.13641413 -0.33797165  0.54888143  1.35511150
+##  [25] -0.41859465 -0.98295570 -0.82170969 -1.10389021 -0.29766014 -0.41859465
+##  [31] -0.29766014 -0.98295570 -0.01547962 -0.94264420 -0.45890616  0.87137346
+##  [37]  0.06514339  0.06514339 -0.70077518  0.34732391  0.30701241 -0.33797165
+##  [43]  1.23417699  1.51635752 -0.90233270 -1.10389021 -0.01547962 -0.53952916
+##  [49] -0.37828315 -0.70077518 -0.09610262 -0.41859465  0.10545489 -1.02326721
+##  [55] -0.70077518 -0.21703714  0.06514339 -0.25734864 -0.45890616 -0.74108668
+##  [61] -0.33797165  0.26670091 -0.17672563 -0.78139819  0.10545489  0.06514339
+##  [67] -0.78139819 -0.98295570  0.18607790  2.08071857  0.26670091 -0.37828315
+##  [73]  2.68539112  2.24196458 -0.66046367  1.23417699 -0.86202119 -0.45890616
+##  [79] -1.06357871  0.06514339 -0.53952916 -1.02326721 -0.74108668 -0.90233270
+##  [85]  0.26670091 -0.45890616 -0.74108668  0.62950444  0.87137346 -0.33797165
+##  [91] -0.82170969  0.66981594 -0.98295570 -0.17672563  0.26670091  0.38763542
+##  [97] -0.33797165 -0.53952916 -0.01547962 -1.02326721 -0.66046367 -0.78139819
+## [103]  1.43573451 -0.33797165  2.04040706 -0.13641413 -0.21703714  1.59698053
+## [109]  0.18607790  0.06514339 -0.25734864 -0.29766014 -0.94264420 -0.78139819
+## [115]  0.66981594  0.06514339 -0.05579112 -0.17672563  0.26670091  0.22638940
+## [121]  0.46825843  0.46825843 -0.41859465 -0.25734864 -0.66046367  0.54888143
+## [127]  0.06514339  0.14576640 -0.66046367 -0.62015217 -0.90233270 -0.86202119
+## [133] -0.33797165  0.06514339 -0.25734864 -0.49921766 -0.33797165  0.91168496
+## [139]  1.07293098  0.54888143 -0.62015217 -0.37828315 -0.82170969 -0.25734864
+## [145]  0.46825843 -1.02326721 -0.09610262  0.34732391  1.67760353 -0.62015217
+## [151]  1.03261948  0.26670091 -0.53952916  1.07293098 -0.49921766 -0.01547962
+## [157] -0.74108668  4.49940878  0.14576640  0.58919294 -0.13641413 -0.90233270
+## [163]  4.49940878 -0.53952916 -0.33797165  0.54888143 -0.45890616 -0.45890616
+## [169] -0.66046367 -0.33797165 -0.13641413  0.14576640 -1.06357871  0.34732391
+## [175] -0.98295570 -0.25734864 -0.53952916  2.20165308 -0.33797165  0.83106196
+## [181]  2.48383360 -0.17672563  0.54888143  0.18607790 -0.25734864 -1.02326721
+## [187] -0.82170969 -0.01547962 -0.86202119  0.30701241 -0.37828315  0.46825843
+## [193] -0.98295570 -1.02326721 -0.49921766 -1.10389021 -0.25734864  1.27448850
+## [199] -0.90233270  0.46825843 -0.49921766 -0.62015217 -0.05579112  0.87137346
+## [205]  0.26670091 -0.49921766  3.73349022 -0.66046367 -1.06357871  1.27448850
+## [211]  1.91947255 -0.13641413 -0.98295570  1.87916105  0.79075045 -0.41859465
+## [217] -0.86202119 -0.17672563 -0.78139819 -1.02326721 -0.82170969 -0.62015217
+## [223] -0.86202119 -0.33797165  0.10545489 -0.33797165 -1.02326721  3.49162119
+## [229] -0.25734864 -0.82170969 -0.13641413 -0.25734864  2.80632563  0.06514339
+## [235]  0.14576640 -0.41859465 -0.49921766 -0.49921766 -0.62015217  0.14576640
+## [241] -0.41859465  0.66981594  1.07293098  1.67760353  0.42794692 -0.82170969
+## [247] -0.98295570 -0.49921766  1.87916105 -0.98295570</code></pre>
+<p>Example</p>
+<p>Prof scales on z-scores and those who have z-score value of greater than 1.28, get an A</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="univariate.html#cb69-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">54</span>, <span class="dv">50</span>, <span class="dv">79</span>, <span class="dv">79</span>, <span class="dv">51</span>, <span class="dv">69</span>, <span class="dv">55</span>, <span class="dv">62</span>, <span class="dv">100</span>, <span class="dv">80</span>)</span>
+<span id="cb69-2"><a href="univariate.html#cb69-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">/</span><span class="fu">sd</span>(x)</span>
+<span id="cb69-3"><a href="univariate.html#cb69-3" aria-hidden="true" tabindex="-1"></a>x[z <span class="sc">&gt;=</span> <span class="fl">1.28</span>]</span></code></pre></div>
+<pre><code>## [1] 100</code></pre>
+<p>what score is just good enough for an A?</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="univariate.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fl">1.28</span> <span class="sc">*</span> <span class="fu">sd</span>(x)</span></code></pre></div>
+<pre><code>## [1] 88.91046</code></pre>
+<ul>
+<li>formula reverses the z-score formula is read as the score which is 1.28 SD above the mean</li>
+<li>z-score allow datasets with different scales to be compared</li>
+</ul>
+</div>
+</div>
+<div id="shape-distribution" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Shape (distribution)<a href="univariate.html#shape-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>normal</li>
+</ul>
+</div>
+</div>
+<div id="categorical-data" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> categorical data<a href="univariate.html#categorical-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="univariate.html#cb73-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> babies<span class="sc">$</span>smoke</span>
+<span id="cb73-2"><a href="univariate.html#cb73-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">factor</span>(x, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;never&quot;</span>, <span class="st">&quot;now&quot;</span>, <span class="st">&quot;until current&quot;</span>, <span class="st">&quot;once, quit&quot;</span>, <span class="st">&quot;unknown&quot;</span> ))</span>
+<span id="cb73-3"><a href="univariate.html#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(x)</span></code></pre></div>
+<pre><code>## x
+##         never           now until current    once, quit       unknown 
+##           544           484            95           103            10</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="univariate.html#cb75-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">table</span>(x)</span>
+<span id="cb75-2"><a href="univariate.html#cb75-2" aria-hidden="true" tabindex="-1"></a>prop <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> out <span class="sc">/</span> <span class="fu">sum</span>(out)</span>
+<span id="cb75-3"><a href="univariate.html#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(prop, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## x
+##         never           now until current    once, quit       unknown 
+##         44.01         39.16          7.69          8.33          0.81</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="univariate.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fat)</span></code></pre></div>
+<pre><code>##  [1] &quot;case&quot;          &quot;body.fat&quot;      &quot;body.fat.siri&quot; &quot;density&quot;      
+##  [5] &quot;age&quot;           &quot;weight&quot;        &quot;height&quot;        &quot;BMI&quot;          
+##  [9] &quot;ffweight&quot;      &quot;neck&quot;          &quot;chest&quot;         &quot;abdomen&quot;      
+## [13] &quot;hip&quot;           &quot;thigh&quot;         &quot;knee&quot;          &quot;ankle&quot;        
+## [17] &quot;bicep&quot;         &quot;forearm&quot;       &quot;wrist&quot;</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="univariate.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fat<span class="sc">$</span>wrist, fat<span class="sc">$</span>neck)</span></code></pre></div>
+<p><img src="r4Stats_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+
 </div>
 </div>
             </section>
@@ -365,7 +567,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

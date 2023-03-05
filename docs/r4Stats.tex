@@ -117,7 +117,7 @@
 
 \title{R4Stats}
 \author{Colin Madland}
-\date{2023-03-03}
+\date{2023-03-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -885,6 +885,9 @@ what score is just good enough for an A?
 ##         44.01         39.16          7.69          8.33          0.81
 \end{verbatim}
 
+\hypertarget{bivariate-data}{%
+\chapter{Bivariate Data}\label{bivariate-data}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{names}\NormalTok{(fat)}
@@ -899,6 +902,21 @@ what score is just good enough for an A?
 ## [17] "bicep"         "forearm"       "wrist"
 \end{verbatim}
 
+\hypertarget{correlation}{%
+\section{Correlation}\label{correlation}}
+
+p.106
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{correlation} is a numeric summary of how closely related are the measures of two numeric variables when they are in a linear relationship.
+\item
+  perfect correlation would mean data on a straight line;
+\item
+  no correlation means values are scattered
+\end{itemize}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{plot}\NormalTok{(fat}\SpecialCharTok{$}\NormalTok{wrist, fat}\SpecialCharTok{$}\NormalTok{neck)}
@@ -907,16 +925,339 @@ what score is just good enough for an A?
 
 \includegraphics{r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf}
 
-\hypertarget{parts}{%
-\chapter{Parts}\label{parts}}
+or
 
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
+\texttt{plot(neck\ \textasciitilde{}\ wrist,\ data\ =\ fat)}
 
-Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+To investigate \texttt{correlation}, shift centre of scatter plot to the mean of \texttt{x} variable and the mean of \texttt{y} variable and add \texttt{abline} and \texttt{point} functions
+- plot below separates the data into 4 quadrants as determined by points that are above and below the mean of all \texttt{x} values and those above and below the mean of all \texttt{y} values
 
-Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}}\NormalTok{ fat}\SpecialCharTok{$}\NormalTok{wrist[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]; y }\OtherTok{\textless{}{-}}\NormalTok{ fat}\SpecialCharTok{$}\NormalTok{neck[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]                      }\CommentTok{\# data}
+\FunctionTok{plot}\NormalTok{(x, y, }\AttributeTok{main =} \StringTok{"Neck by Wrist"}\NormalTok{)            }
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v =} \FunctionTok{mean}\NormalTok{(x), }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)                                     }\CommentTok{\# dashed vertical line}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =} \FunctionTok{mean}\NormalTok{(y), }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)                                     }\CommentTok{\# dashed horizontal line}
+\FunctionTok{points}\NormalTok{(}\FunctionTok{mean}\NormalTok{(x), }\FunctionTok{mean}\NormalTok{(y), }\AttributeTok{pch=}\DecValTok{16}\NormalTok{, }\AttributeTok{cex=}\DecValTok{4}\NormalTok{, }\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, .}\DecValTok{25}\NormalTok{))  }
+\end{Highlighting}
+\end{Shaded}
 
-Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-45-1.pdf}
+- correlated data shows in opposite regions (bottom left and top right)
+
+\hypertarget{covariance}{%
+\subsection{covariance}\label{covariance}}
+
+\[
+cov(x,y)=\frac{1}{n-1}\sum(x_i-\bar{x})(y_i-\bar{y})
+\]
+
+\hypertarget{pearson-correlation-coefficient}{%
+\subsection{\texorpdfstring{\texttt{Pearson\ correlation\ coefficient}}{Pearson correlation coefficient}}\label{pearson-correlation-coefficient}}
+
+\begin{itemize}
+\tightlist
+\item
+  uses \texttt{z-score} instead of deviations\ldots{}
+\end{itemize}
+
+\[
+cor(x,y)=\frac{1}{n-1}\sum\frac{(x_i-\bar{x})}{s_x}\frac{(y_i-\bar{y})}{s_y}=cov(x,y)/(s_xs_y)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  formula is symmetric, so \texttt{x} and \texttt{y} can have order switched
+\item
+  using \texttt{z-score} removes the effect of spread and centre by standardizing
+\end{itemize}
+
+\hypertarget{cov-and-cor-functions}{%
+\subsubsection{\texorpdfstring{\texttt{cov} and \texttt{cor} functions}{cov and cor functions}}\label{cov-and-cor-functions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(fat}\SpecialCharTok{$}\NormalTok{wrist, fat}\SpecialCharTok{$}\NormalTok{neck)    }\CommentTok{\# strongly correlated}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7448264
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(fat}\SpecialCharTok{$}\NormalTok{wrist, fat}\SpecialCharTok{$}\NormalTok{height)  }\CommentTok{\# mildly correlated}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3220653
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(fat}\SpecialCharTok{$}\NormalTok{age, fat}\SpecialCharTok{$}\NormalTok{ankle)     }\CommentTok{\# basically uncorrelated}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.1050581
+\end{verbatim}
+
+\hypertarget{spearman-correlation-coefficient}{%
+\subsection{\texorpdfstring{\texttt{Spearman\ correlation\ coefficient}}{Spearman correlation coefficient}}\label{spearman-correlation-coefficient}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{Pearson} measures the strength of linear ralationship
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(Animals}\SpecialCharTok{$}\NormalTok{body, Animals}\SpecialCharTok{$}\NormalTok{brain)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.005341163
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  very low correlation\ldots{}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Animals}\SpecialCharTok{$}\NormalTok{body, Animals}\SpecialCharTok{$}\NormalTok{brain)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-48-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{body }\OtherTok{\textless{}{-}}\NormalTok{ Animals}\SpecialCharTok{$}\NormalTok{body; brain }\OtherTok{\textless{}{-}}\NormalTok{ Animals}\SpecialCharTok{$}\NormalTok{brain}
+\NormalTok{cross\_prods }\OtherTok{\textless{}{-}}\NormalTok{ (body }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(body)) }\SpecialCharTok{*}\NormalTok{ (brain }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(brain))}
+\NormalTok{Animals[cross\_prods }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 body  brain
+## Dipliodocus    11700   50.0
+## Asian elephant  2547 4603.0
+## Horse            521  655.0
+## Giraffe          529  680.0
+## Human             62 1320.0
+## Triceratops     9400   70.0
+## Brachiosaurus  87000  154.5
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  brachiosaurus is a huge outlier\ldots{}
+\item
+  so, rank the data
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(}\FunctionTok{rank}\NormalTok{(body), }\FunctionTok{rank}\NormalTok{(brain))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7162994
+\end{verbatim}
+
+or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(body, brain, }\AttributeTok{method=}\StringTok{"spearman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7162994
+\end{verbatim}
+
+\hypertarget{correlation-with-replication}{%
+\subsubsection{correlation with replication}\label{correlation-with-replication}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(ToothGrowth}\SpecialCharTok{$}\NormalTok{dose, ToothGrowth}\SpecialCharTok{$}\NormalTok{len)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8026913
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  positive correlation
+\item
+  for each dosage there are several experimental units
+  -split data into 3 groups and then compute the correlation for these dosage values and the group averages
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l }\OtherTok{\textless{}{-}} \FunctionTok{split}\NormalTok{(ToothGrowth}\SpecialCharTok{$}\NormalTok{len, ToothGrowth}\SpecialCharTok{$}\NormalTok{dose)}
+\NormalTok{group\_means }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{mean}\NormalTok{(l[[}\DecValTok{1}\NormalTok{]]), }\FunctionTok{mean}\NormalTok{(l[[}\DecValTok{2}\NormalTok{]]), }\FunctionTok{mean}\NormalTok{(l[[}\DecValTok{3}\NormalTok{]]))}
+\FunctionTok{cor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), group\_means)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9574428
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  0.95 for aggregated data is higher than 0.8 for individual data. In general, correlations formed from averages are typically closer to 1 or -1.
+\end{itemize}
+
+\hypertarget{correlation-v-causation}{%
+\subsubsection{correlation v causation}\label{correlation-v-causation}}
+
+\begin{itemize}
+\tightlist
+\item
+  what is the relationship between average teacher pay and SAT scores?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cor}\NormalTok{(SAT}\SpecialCharTok{$}\NormalTok{salary, SAT}\SpecialCharTok{$}\NormalTok{total)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -0.4398834
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(SAT}\SpecialCharTok{$}\NormalTok{salary, SAT}\SpecialCharTok{$}\NormalTok{total)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-55-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(total}\SpecialCharTok{\textasciitilde{}}\NormalTok{salary, SAT)}
+\FunctionTok{points}\NormalTok{(total}\SpecialCharTok{\textasciitilde{}}\NormalTok{salary, SAT, }\AttributeTok{subset =}\NormalTok{ perc }\SpecialCharTok{\textless{}} \DecValTok{10}\NormalTok{, }\AttributeTok{pch=}\DecValTok{15}\NormalTok{)  }\CommentTok{\# square}
+\FunctionTok{points}\NormalTok{(total }\SpecialCharTok{\textasciitilde{}}\NormalTok{ salary, SAT, }\AttributeTok{subset =}\NormalTok{ perc }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{, }\AttributeTok{pch=}\DecValTok{16}\NormalTok{) }\CommentTok{\#solid}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-56-1.pdf}
+- shows correlation for each subgroup is positive
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{total }\OtherTok{\textless{}{-}}\NormalTok{ SAT}\SpecialCharTok{$}\NormalTok{total; salary }\OtherTok{\textless{}{-}}\NormalTok{ SAT}\SpecialCharTok{$}\NormalTok{salary; perc }\OtherTok{\textless{}{-}}\NormalTok{ SAT}\SpecialCharTok{$}\NormalTok{perc}
+\NormalTok{less\_10 }\OtherTok{\textless{}{-}}\NormalTok{ perc }\SpecialCharTok{\textless{}} \DecValTok{10}
+\NormalTok{more\_40 }\OtherTok{\textless{}{-}}\NormalTok{ perc }\SpecialCharTok{\textgreater{}} \DecValTok{40}
+\NormalTok{between }\OtherTok{\textless{}{-}} \SpecialCharTok{!}\NormalTok{less\_10 }\SpecialCharTok{\&} \SpecialCharTok{!}\NormalTok{more\_40}
+\FunctionTok{c}\NormalTok{(}\AttributeTok{less =} \FunctionTok{cor}\NormalTok{(total[less\_10], salary[less\_10]),}
+  \AttributeTok{between =} \FunctionTok{cor}\NormalTok{(total[between], salary[between]),}
+  \AttributeTok{more =} \FunctionTok{cor}\NormalTok{(total[more\_40], salary[more\_40]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      less   between      more 
+## 0.2588199 0.2224926 0.3673461
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  all correlations are positive for subgroups, yet overall correlation is negative, called \texttt{Simpson\textquotesingle{}s\ paradox} where some trend that exists for subgroups disappears when data are aggregated
+\end{itemize}
+
+\hypertarget{trends}{%
+\section{Trends}\label{trends}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(len }\SpecialCharTok{\textasciitilde{}}\NormalTok{ dose, }\AttributeTok{data=}\NormalTok{ToothGrowth, }\AttributeTok{pch=}\DecValTok{16}\NormalTok{, }\AttributeTok{col=}\FunctionTok{rgb}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{, .}\DecValTok{25}\NormalTok{))}
+\FunctionTok{points}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), group\_means, }\AttributeTok{cex=}\FloatTok{1.5}\NormalTok{, }\AttributeTok{pch=}\DecValTok{18}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{), group\_means)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-58-1.pdf}
+
+\begin{itemize}
+\tightlist
+\item
+  summarize a relationship between two numeric variables
+\item
+  model for a linear trend can be specified as follows:
+  \textgreater{} The mean response value depends linearly on the predictor value.
+\end{itemize}
+
+\[
+\mu_{y|x}=\beta_0+\beta_1x 
+\]
+where \(\mu_{y|x}\) means the mean of the response variable for a specified value of the predictor \(x\)
+
+\begin{itemize}
+\tightlist
+\item
+  for individual data points this becomes
+  \[
+  y_i=\beta_0+\beta_1x_i+\epsilon_i 
+  \]
+  where \(\epsilon_i\) are the error terms
+\item
+  we make assumptions about \(\epsilon_i\), that on average, the values of \(\epsilon_i\) are 0
+\end{itemize}
+
+\hypertarget{lm-function}{%
+\subsection{\texorpdfstring{\texttt{lm} function}{lm function}}\label{lm-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(maxrate }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data=}\NormalTok{heartrate)}
+\NormalTok{res}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = maxrate ~ age, data = heartrate)
+## 
+## Coefficients:
+## (Intercept)          age  
+##    210.0485      -0.7977
+\end{verbatim}
+
+Visualizing the regression line
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(maxrate }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age, }\AttributeTok{data=}\NormalTok{heartrate)}
+\FunctionTok{abline}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{r4Stats_files/figure-latex/unnamed-chunk-60-1.pdf}
 
 \hypertarget{footnotes-and-citations}{%
 \chapter{Footnotes and citations}\label{footnotes-and-citations}}

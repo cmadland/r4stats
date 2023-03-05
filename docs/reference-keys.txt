@@ -16,7 +16,16 @@ z-score
 defining-function
 shape-distribution
 categorical-data
-parts
+bivariate-data
+correlation
+covariance
+pearson-correlation-coefficient
+cov-and-cor-functions
+spearman-correlation-coefficient
+correlation-with-replication
+correlation-v-causation
+trends
+lm-function
 footnotes-and-citations
 footnotes
 citations

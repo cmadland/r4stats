@@ -262,23 +262,3 @@ out <- table(x)
 prop <- 100 * out / sum(out)
 round(prop, digits = 2)
 ```
-
-```{R}
-names(fat)
-```
-
-```{R}
-plot(fat$wrist, fat$neck)
-```
-
-or
-
-`plot(neck ~ wrist, data = fat)`
-
-```{R}
-x <- fat$wrist[1:20]; y <- fat$neck[1:20]
-plot(x, y, main = "Neck by Wrist")
-abline(v = mean(x), lty=2)
-abline(h = mean(y), lty=2)
-points(mean(x), mean(y), pch=16, cex=4, col=rgb(0,0,0, .25))
-```

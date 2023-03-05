@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.28)  3 MAR 2023 17:00
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.28)  4 MAR 2023 20:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1137,49 +1137,80 @@ Overfull \hbox (33.0pt too wide) in paragraph at lines 886--886
 []\TU/lmtt/m/n/10 ##         44.01         39.16          7.69          8.33          0.81[] 
  []
 
-File: r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (type pdf)
-<use r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf>
 [19] [20
 
 ]
 Chapter 3.
+File: r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-44-1.pdf>
 
-Underfull \hbox (badness 1859) in paragraph at lines 917--918
-[]\TU/lmr/m/n/10 Add an unnumbered part: \TU/lmtt/m/n/10 # (PART\*) Act one {-} \TU/lmr/m/n/10 (followed by \TU/lmtt/m/n/10 # A
+Underfull \vbox (badness 3375) has occurred while \output is active []
+
+[21]
+File: r4Stats_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-45-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 945--947
+[][]
  []
 
-[21] [22
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[22]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 956.
+[23]
+File: r4Stats_files/figure-latex/unnamed-chunk-48-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-48-1.pdf>
+[24] [25]
+File: r4Stats_files/figure-latex/unnamed-chunk-55-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-55-1.pdf>
+File: r4Stats_files/figure-latex/unnamed-chunk-56-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-56-1.pdf>
+
+Underfull \hbox (badness 10000) in paragraph at lines 1166--1168
+[][]
+ []
+
+[26]
+File: r4Stats_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-58-1.pdf>
+[27] [28]
+File: r4Stats_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (type pdf)
+<use r4Stats_files/figure-latex/unnamed-chunk-60-1.pdf>
+[29] [30
 
 ]
 Chapter 4.
 
-Package natbib Warning: Citation `R-bookdown' on page 23 undefined on input line 934.
+Package natbib Warning: Citation `R-bookdown' on page 31 undefined on input line 1275.
 
-[23] [24
+[31] [32
 
 ]
 Chapter 5.
-[25] [26
+[33] [34
 
 ]
 Chapter 6.
-[27] (./r4Stats.bbl [28])
+[35] (./r4Stats.bbl [36])
 
 Package natbib Warning: There were undefined citations.
 
-[29
+[37
 
 ] (./r4Stats.aux)
 Package rerunfilecheck Info: File `r4Stats.out' has not changed.
-(rerunfilecheck)             Checksum: BB0FB080DE26A23449895A038AFDD900;2712.
+(rerunfilecheck)             Checksum: 3EBC3FCAA46DB335037E5FD3B9D6BD3D;2955.
  ) 
 Here is how much of TeX's memory you used:
- 17606 strings out of 477747
- 322467 string characters out of 5843090
- 815523 words of memory out of 5000000
- 38405 multiletter control sequences out of 15000+600000
- 475758 words of font info for 87 fonts, out of 8000000 for 9000
+ 17670 strings out of 477747
+ 325272 string characters out of 5843090
+ 816157 words of memory out of 5000000
+ 38460 multiletter control sequences out of 15000+600000
+ 475774 words of font info for 89 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  86i,8n,121p,658b,472s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on r4Stats.pdf (29 pages).
+Output written on r4Stats.pdf (37 pages).

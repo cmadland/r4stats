@@ -1,0 +1,182 @@
+# Bivariate Data
+
+
+```{R}
+names(fat)
+```
+## Correlation
+
+p.106
+
+- `correlation` is a numeric summary of how closely related are the measures of two numeric variables when they are in a linear relationship.
+- perfect correlation would mean data on a straight line;
+- no correlation means values are scattered
+
+```{R}
+plot(fat$wrist, fat$neck)
+```
+
+or
+
+`plot(neck ~ wrist, data = fat)`
+
+To investigate `correlation`, shift centre of scatter plot to the mean of `x` variable and the mean of `y` variable and add `abline` and `point` functions
+- plot below separates the data into 4 quadrants as determined by points that are above and below the mean of all `x` values and those above and below the mean of all `y` values
+
+```{R}
+x <- fat$wrist[1:20]; y <- fat$neck[1:20]                      # data
+plot(x, y, main = "Neck by Wrist")            
+abline(v = mean(x), lty=2)                                     # dashed vertical line
+abline(h = mean(y), lty=2)                                     # dashed horizontal line
+points(mean(x), mean(y), pch=16, cex=4, col=rgb(0,0,0, .25))  
+```
+- correlated data shows in opposite regions (bottom left and top right)
+
+### covariance
+
+$$
+cov(x,y)=\frac{1}{n-1}\sum(x_i-\bar{x})(y_i-\bar{y})
+$$
+
+
+### `Pearson correlation coefficient`
+
+- uses `z-score` instead of deviations...
+
+$$
+cor(x,y)=\frac{1}{n-1}\sum\frac{(x_i-\bar{x})}{s_x}\frac{(y_i-\bar{y})}{s_y}=cov(x,y)/(s_xs_y)
+$$
+
+- formula is symmetric, so `x` and `y` can have order switched
+- using `z-score` removes the effect of spread and centre by standardizing
+
+#### `cov` and `cor` functions
+
+```{R}
+cor(fat$wrist, fat$neck)    # strongly correlated
+
+cor(fat$wrist, fat$height)  # mildly correlated
+
+cor(fat$age, fat$ankle)     # basically uncorrelated
+```
+
+### `Spearman correlation coefficient`
+
+- `Pearson` measures the strength of linear ralationship
+
+```{R}
+cor(Animals$body, Animals$brain)
+```
+
+- very low correlation...
+
+```{R}
+
+plot(Animals$body, Animals$brain)
+```
+
+```{R}
+body <- Animals$body; brain <- Animals$brain
+cross_prods <- (body - mean(body)) * (brain - mean(brain))
+Animals[cross_prods < 0, ]
+```
+- brachiosaurus is a huge outlier...
+- so, rank the data
+
+```{R}
+cor(rank(body), rank(brain))
+```
+
+or
+
+```{R}
+cor(body, brain, method="spearman")
+```
+
+#### correlation with replication
+
+```{R}
+cor(ToothGrowth$dose, ToothGrowth$len)
+```
+- positive correlation
+- for each dosage there are several experimental units
+-split data into 3 groups and then compute the correlation for these dosage values and the group averages
+
+```{R}
+l <- split(ToothGrowth$len, ToothGrowth$dose)
+group_means <- c(mean(l[[1]]), mean(l[[2]]), mean(l[[3]]))
+cor(c(0.5, 1, 2), group_means)
+```
+
+- 0.95 for aggregated data is higher than 0.8 for individual data. In general, correlations formed from averages are typically closer to 1 or -1.
+
+#### correlation v causation
+
+- what is the relationship between average teacher pay and SAT scores?
+
+```{R}
+cor(SAT$salary, SAT$total)
+```
+
+```{R}
+plot(SAT$salary, SAT$total)
+```
+
+```{R}
+plot(total~salary, SAT)
+points(total~salary, SAT, subset = perc < 10, pch=15)  # square
+points(total ~ salary, SAT, subset = perc > 40, pch=16) #solid
+```
+- shows correlation for each subgroup is positive
+
+```{R}
+total <- SAT$total; salary <- SAT$salary; perc <- SAT$perc
+less_10 <- perc < 10
+more_40 <- perc > 40
+between <- !less_10 & !more_40
+c(less = cor(total[less_10], salary[less_10]),
+  between = cor(total[between], salary[between]),
+  more = cor(total[more_40], salary[more_40]))
+```
+
+- all correlations are positive for subgroups, yet overall correlation is negative, called `Simpson's paradox` where some trend that exists for subgroups disappears when data are aggregated
+
+## Trends
+
+```{R}
+plot(len ~ dose, data=ToothGrowth, pch=16, col=rgb(0,0,0, .25))
+points(c(0.5, 1, 2), group_means, cex=1.5, pch=18)
+lines(c(0.5, 1, 2), group_means)
+```
+
+- summarize a relationship between two numeric variables
+- model for a linear trend can be specified as follows:
+> The mean response value depends linearly on the predictor value.
+
+$$
+\mu_{y|x}=\beta_0+\beta_1x 
+$$
+where $\mu_{y|x}$ means the mean of the response variable for a specified value of the predictor $x$
+
+- for individual data points this becomes
+$$
+y_i=\beta_0+\beta_1x_i+\epsilon_i 
+$$
+where $\epsilon_i$ are the error terms
+- we make assumptions about $\epsilon_i$, that on average, the values of $\epsilon_i$ are 0
+
+### `lm` function
+
+```{R}
+res <- lm(maxrate ~ age, data=heartrate)
+res
+```
+Visualizing the regression line
+
+```{R}
+plot(maxrate ~ age, data=heartrate)
+abline(res)
+```
+
+
+

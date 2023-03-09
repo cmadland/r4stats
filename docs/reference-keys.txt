@@ -26,6 +26,17 @@ correlation-with-replication
 correlation-v-causation
 trends
 lm-function
+bivariate-categorical-data
+summarized-data
+unsummarized-data
+marginal-distributions-of-two-way-tables
+conditional-distributions-of-two-way-tables
+xtabs-function
+ftable
+graphical-summaries-of-two-way-contingency-tables
+mosaic-plots
+measures-of-association-for-categorical-data
+kendall-tau
 footnotes-and-citations
 footnotes
 citations

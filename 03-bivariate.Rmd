@@ -1,5 +1,9 @@
 # Bivariate Data
 
+```{r}
+fat
+```
+
 
 ```{R}
 names(fat)
@@ -179,4 +183,285 @@ abline(res)
 ```
 
 
+## Bivariate Categorical Data
 
+p132
+
+- usually presented in form of a `two-way contingency table`
+- count occurrences of each possible pair of levels and place frequencies on a grid
+- then compare rows and columns
+
+### Summarized data
+
+- create tables in R with `rbind`or `cbind`
+
+```{r}
+rbind(c(56,8), c(2,16)) # bind as rows
+```
+
+```{r}
+cbind(c(56,2), c(8,16)) # bind as columns
+```
+ - can also use `matrix`
+ 
+```{r}
+seatbelts <- matrix(c(56, 2, 8, 16), nrow=2)
+seatbelts
+```
+
+
+
+```{r}
+rownames(seatbelts) <- c("buckled", "unbuckled")
+colnames(seatbelts) <- c("buckled", "unbuckled")
+seatbelts
+```
+
+### Unsummarized data
+
+p134
+
+```{r}
+headtail(grades, k=3)
+```
+```{r}
+table(grades)
+```
+
+## Marginal distributions of two-way tables
+p135
+
+- distribution of each variable is called `marginal distribution`
+- marginal distributions can be found by summing down the rows or columns with `margin.table`
+
+```{r}
+dimnames(seatbelts) <- list(parent=c("Buckled", "unbuckled"),
+                            child=c("buckled", "unbuckled"))
+seatbelts
+```
+
+```{r}
+margin.table(seatbelts, margin=1)  # 1 is for rows
+```
+
+```{r}
+margin.table(seatbelts, margin=2)  # 2 is for columns
+```
+
+`addmargins` will return marginal distributions by extending the table
+
+```{r}
+addmargins(seatbelts)
+```
+
+```{r}
+tbl <- with(grades, table(prev, grade))
+margin.table(tbl, 1)
+```
+
+```{r}
+margin.table(tbl, 2)
+```
+
+### Conditional distributions of two-way tables
+
+- comparing rows of a two-way table
+  - does a previous grade influence a grade
+  
+```{r}
+prop.table(tbl, margin=1) * 100
+```
+
+- comparing rows shows that previous grade has a strong influence on the current grade
+
+### `xtabs` function
+
+- althernative to `table`, where the structure of the table is specified with a model formula
+
+```{r}
+headtail(Fingerprints)
+```
+
+```{r}
+xtabs(count ~ Whorls + Loops, Fingerprints)
+```
+
+### `ftable`
+
+- flattens contingency tables
+
+```{r}
+tbl <- xtabs( ~ Origin + Type + Passengers, Cars93)
+ftable(tbl, row.vars=2, col.vars=c(1,3))
+```
+
+## Graphical summaries of two-way contingency tables
+
+p.140
+
+- bar plots as with numerical data
+
+### Mosaic plots
+
+- suitable for viewing relationships between two or more categorical variables
+
+```{r}
+titanic <- as.data.frame(Titanic)
+xtabs(Freq ~ Survived + Class, data=titanic, subset=Sex=="Female")
+```
+- need to convert `Titanic` to a dataframe as it was a contingency table and `xtabs` displays tabular data
+
+```{r}
+tbl <- xtabs(Freq ~ Sex, titanic)
+mosaicplot(tbl)
+```
+
+```{r}
+tbl <- xtabs(Freq ~ Sex + Survived, titanic)
+mosaicplot(tbl)
+```
+```{r}
+tbl <- xtabs(Freq ~ Sex + Survived + Class, titanic)
+mosaicplot(tbl)
+```
+
+## Measures of association for categorical data
+
+p.143
+
+```{r}
+mosaicplot(xtabs(Freq ~ Survived + Class, titanic))
+```
+
+Segmentation of the `survived` variable by `class` is different showing they are "correlated" - the value of one depends on the other.
+- Pearson's correlation is for numerical data but these are categorical
+-the variables `class` and `survived` are not numeric but they are naturally ordered
+- to make ordered factors out of the data.
+
+```{r}
+survived <- rep(titanic$Survived, titanic$Freq)
+survivied <- ordered(survived)
+class <- rep(titanic$Class, titanic$Freq)
+class <- ordered(class)
+head(class)
+```
+
+- That the levels are ordered is indicated with `<` above
+- now we can coerce them into numeric data with `as.numeric` and calculate `correlation`
+
+```{r}
+cor(as.numeric(survived), as.numeric(class), method="kendall")
+```
+
+- negative correlation is due to the ordering of class with `1st` being a 1 and `crew` being a 4
+
+### Kendall $\tau$ 
+p145
+
+- meaure of the association between data that can be ranked, such as ordered factors
+
+$$
+\tau=\frac{\text{number of concordant pairs}-\text{number of discordant pairs}}{n(n-1)/2}
+$$
+
+- a pair of observations $(x_iy_i)$ and $(x_jy_j)$ is concordant if the ranks are in agreement (both $x_i$ and $y_i$ are higher ranked than their counterparts)
+
+### `chi-squared` statistic
+
+- common summary of a table
+- computed by the summary function when called on a table object
+
+```{r}
+f <- Freq ~ Survived + Class
+tbl <- xtabs(f, data=titanic, subset=Sex=="Female")
+summary(tbl)
+```
+```{r}
+tbl
+```
+- `chisq` of 131
+- related to the number of residuals in the table
+  - observed frequencies $f_o$ minus expected frequencies $f_e$
+  - expected values are found from the marginal values
+  expected value for upper left cell is the proportion of the number of times a value is in the upper row times the proportion of times a value is in the left-most column times the total number of observations
+  
+```{r}
+margin.table(tbl, 1)
+```  
+  
+```{r}
+ptop <- 126/sum(margin.table(tbl, 1))
+margin.table(tbl, 2)
+```
+
+```{r}
+pleft <- 145/sum(margin.table(tbl, 2))
+fe <- ptop * pleft * sum(tbl)
+fo <- tbl[1,1]
+c(fo=fo, fe=fe, residual=fo-fe)
+```
+
+- large residual as many fewer ppl in 1st class perished than would have been expected given the totals
+- this is a tedious calculation, so `chisq.test` function
+
+```{r}
+chisq.test(tbl)$expected
+```
+
+$$
+chi-squared statistic=\sum\frac{(f_o-f_e)^2}{f_e}
+$$
+calculated as
+
+```{r}
+fo <- tbl
+fe <- chisq.test(tbl)$expected
+(fo - fe)^2/fe
+```
+
+
+```{r}
+sum((fo - fe)^2/fe)
+```
+
+- if the sum is large, the variable are associated
+- if the sum is small, there is little association
+  - large and small in chapter 10
+  
+### Association btwn 2by2 tables, `odds ratio`
+
+```{r}
+xtabs(Freq ~ Sex + Survived, titanic)
+```
+
+- probability of a male surviving was 367/(1364 + 367) = 0.21.
+- odds of a male surviving is the ration of the probabilities of survival divided by the probability of not surviving (367/(1364 + 367)/1364/(1364 + 367)) = 367/1364 = 0.27
+- odds of a female surviving were 344/126 = 2.73
+- comparing odds, uses a ratio
+- odds ratio of a female surviving compared to a male surviving would be (344/126)/(367/1364) = 10.15
+- so a randomly chosen female passenger was ten times more likely to survive than a randomly chosen male passenger
+- this leads us to conclude that survival and gender were related or associated
+
+## Problems
+
+Using dataset `coins`
+- How much money is in the change bin?
+```{r}
+tbl <- table(coins)
+```
+
+```{r}
+addmargins(tbl)
+```
+
+```{r}
+margin.table(tbl,2)
+```
+
+```{r}
+sum(table(coins$value) * c(0.01, 0.05, 0.10, 0.25))
+```
+
+```{r}
+barplot(table(coins$year))
+```

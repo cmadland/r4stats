@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Colin Madland" />
 
 
-<meta name="date" content="2023-03-04" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -204,6 +204,25 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="bivariate-data.html"><a href="bivariate-data.html#lm-function"><i class="fa fa-check"></i><b>3.2.1</b> <code>lm</code> function</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="bivariate-data.html"><a href="bivariate-data.html#bivariate-categorical-data"><i class="fa fa-check"></i><b>3.3</b> Bivariate Categorical Data</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="bivariate-data.html"><a href="bivariate-data.html#summarized-data"><i class="fa fa-check"></i><b>3.3.1</b> Summarized data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="bivariate-data.html"><a href="bivariate-data.html#unsummarized-data"><i class="fa fa-check"></i><b>3.3.2</b> Unsummarized data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="bivariate-data.html"><a href="bivariate-data.html#marginal-distributions-of-two-way-tables"><i class="fa fa-check"></i><b>3.4</b> Marginal distributions of two-way tables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="bivariate-data.html"><a href="bivariate-data.html#conditional-distributions-of-two-way-tables"><i class="fa fa-check"></i><b>3.4.1</b> Conditional distributions of two-way tables</a></li>
+<li class="chapter" data-level="3.4.2" data-path="bivariate-data.html"><a href="bivariate-data.html#xtabs-function"><i class="fa fa-check"></i><b>3.4.2</b> <code>xtabs</code> function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="bivariate-data.html"><a href="bivariate-data.html#ftable"><i class="fa fa-check"></i><b>3.4.3</b> <code>ftable</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="bivariate-data.html"><a href="bivariate-data.html#graphical-summaries-of-two-way-contingency-tables"><i class="fa fa-check"></i><b>3.5</b> Graphical summaries of two-way contingency tables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="bivariate-data.html"><a href="bivariate-data.html#mosaic-plots"><i class="fa fa-check"></i><b>3.5.1</b> Mosaic plots</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="bivariate-data.html"><a href="bivariate-data.html#measures-of-association-for-categorical-data"><i class="fa fa-check"></i><b>3.6</b> Measures of association for categorical data</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="bivariate-data.html"><a href="bivariate-data.html#kendall-tau"><i class="fa fa-check"></i><b>3.6.1</b> Kendall <span class="math inline">\(\tau\)</span></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a>
 <ul>
@@ -246,7 +265,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">R4Stats</h1>
 <p class="author"><em>Colin Madland</em></p>
-<p class="date"><em>2023-03-04</em></p>
+<p class="date"><em>2023-03-08</em></p>
 </div>
 <div id="about" class="section level1 unnumbered hasAnchor">
 <h1>About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -265,13 +284,13 @@ div.csl-indent {
 <li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
 </ol>
 <p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="index.html#cb14-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
 <p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
 </div>
 <div id="preview-book" class="section level2 unnumbered hasAnchor">
 <h2>Preview book<a href="index.html#preview-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book”, or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="index.html#cb15-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
 </div>

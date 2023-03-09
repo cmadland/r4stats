@@ -1,0 +1,850 @@
+--- 
+title: "R4Stats"
+author: "Colin Madland"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: cmadland/r4stats
+---
+
+```{r}
+require(UsingR)
+```
+
+# About {-}
+
+This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+
+## Usage {-}
+
+Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter _must_ start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
+
+Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+
+The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
+
+## Render book {-}
+
+You can render the HTML version of this example book without changing anything:
+
+1. Find the **Build** pane in the RStudio IDE, and
+
+1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+
+Or build the book from the R console:
+
+```{r, eval=FALSE}
+bookdown::render_book()
+```
+
+To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+
+## Preview book {-}
+
+As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+
+```{r eval=FALSE}
+bookdown::serve_book()
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+<!--chapter:end:index.Rmd-->
+
+# Getting Started with R
+
+## Problems
+
+
+
+```{R}
+1+2*(3+4)
+```
+
+
+
+```{R}
+(4^3)+(3^(2+1))
+```
+ 
+```{R}
+sqrt(4+3)*(2+1)
+```
+
+```{R}
+(1+(2*3^4))/(5/6)-7
+```
+
+```{R}
+(0.25 - 0.2) / (0.2 * (1 - 0.2)/100)^(1/2)
+```
+
+```{R}
+x <- 2
+y <- 3
+z <- 4
+w <- 5
+
+x*y*z*w
+```
+
+
+```{R}
+rivers
+```
+
+
+```{R}
+
+Orange
+```
+
+
+```{R}
+mean(Orange$age)
+```
+
+
+```{R}
+max(Orange$circumference)
+```
+
+<!--chapter:end:01-getting-started.Rmd-->
+
+# Univariate data {#univariate}
+
+```{R setup, include=FALSE}
+require(UsingR)
+```
+
+
+## Levels of measurement {-}
+
+The view in most textbooks is from Stanley Smith Stevens (1964)
+
+::: {.definition}
+**Nominal**  
+Such data is qualitative or descriptive, but not numeric. An example might be the name of a person or the town they are from, or the number on a bib a runner wears in a race.
+:::
+
+::: {.definition}
+**Ordinal**  
+Ordinal data is data with some order, so that we can sort the data from largest to smallest. An example might be the place a runner takes in a race.
+:::
+
+::: {.definition}
+**Interval**  
+Interval data is ordinal data where the difference between two values has some interpretation. The clock time a person finishes might be an example. If we know runner a finishes at noon and runner B at 1PM then we know that runner B took longer. Since we haven’t specified when they started, we don’t know what percent longer though.
+:::
+
+::: {.definition}
+**Ratio**  
+Ration data has a meaningful 0. If we record not the time of finishing, but the time since starting, then 0 has a meaning and we can take a ration of the total time for runner A and B to compare the two.
+:::
+
+However, working with data on a computer is different, requiring different categories...
+
+::: {.definition}
+**Factor**  
+When we look at many variables, some may simply record categories used to group the data. In R we will use *factors* to store these variables. An example might be the browser a user has used to view a website, as gleaned from a log.
+:::
+
+::: {.definition}
+**character**  
+Some categorical data are factors, but others are really just identifiers, and are not used for grouping. An example might be a user’s IP address. Difference can be thought of as distinguishing between *categorizing* a case or *characterizing* a case. While both factor and categorical data are *nominal*, we keep the distinction as we will interact with the data differently.
+:::
+
+::: {.definition}
+**discrete**  
+Discrete data comes from measurements where there are essentially only distinct and separate possible values that can be counted. For example, the number of visits a person makes to a website will always be integer data, as will other counting data.
+:::
+
+::: {.definition}
+**continuous**  
+Data which could conceivably come from a continuum of variables. The recording of time in milliseconds of a visit to a website might be such data. A useful distinction is that for discrete data we expect that cases will share values, whereas for continuous data this will be impossible, or at least very unlikely. We can also turn continuous data into discrete data by truncating (record the minute instead of the millisecond) or by binning.Rather than draw distinctions between ordinal, interval, and ratio, it is more important for statistical theory - in finding a model for the recorded data - to know if the data is discrete or continuous.
+:::
+
+::: {.definition}
+**time and date**  
+Though we just saw that time and date can be considered continuous or discrete, for computers there are often separate ways to handle date and time data. Issues that complicate matters are leap days and time zones, but also scale (some people want millisecond data)
+:::
+
+::: {.definition}
+**hierarchical**  
+while much data is several measurements for several cases and fits nicely onto a rectangular spreadsheet, data on networks does not fit this
+:::
+
+## Data Vectors
+
+Suppose the number of whale beachings in Texas during the 1990s was
+
+`74 122 235 111 292 111 211 133 156 79`
+
+We can combine these into a data set through
+
+```{R}
+whale <- c(74, 122, 235, 111, 292, 111, 211, 133, 156, 79)
+```
+
+ The `whale` object is a *data vector*.
+
+the size of the data set is retreived with the `length` function
+
+```{R}
+length(whale)
+```
+
+```{R}
+sum(whale)
+```
+
+Average can be found with combining the two...
+
+```{R}
+sum(whale)/length(whale)
+```
+or
+
+```{R}
+mean(whale)
+```
+
+### Vectorization
+
+The arithmetic operations and the mathematical functions are vectorized, in that they will be called for each element in a data vector.
+
+```{R}
+whale - mean(whale)
+```
+
+```{R}
+whale^2 / length(whale)
+```
+
+```{R}
+sqrt(whale)
+```
+
+### Missing values
+
+```{R}
+hipcost <- c(10500, 45000, 74100, NA, 83500, 86000, 38200, NA, 44300, 12500, 55700, 43900, 71900, NA, 62000)
+```
+
+NA is interpreted as a missing value, but which may have meaning, so it is not 0
+
+```{R}
+sum(hipcost)
+```
+
+- leads to NA
+- solution is to use na.rm
+
+```{R}
+sum(hipcost, na.rm = TRUE)
+```
+
+```{R}
+mean(hipcost, na.rm = TRUE)
+```
+
+- multivariate datasets have more options related to NA values
+
+### Attributes: names
+
+```{r}
+head(precip)
+```
+```{R}
+head(sort(precip, decreasing=TRUE))
+```
+
+```{R}
+head(names(precip))
+```
+
+### Structured Data
+
+```{R}
+1:length(whale)
+```
+
+```{R}
+0:length(whale)-1
+```
+```{R}
+
+0:(length(whale)-1)
+```
+
+...
+
+## Numeric summaries
+
+### Center 
+
+- most common - mean, median, mode
+
+```{R}
+wts <- kid.weights
+```
+
+```{R}
+sort(wts$weight, decreasing = TRUE)
+```
+
+- sample mean known as `x bar` or $\bar{x}$
+
+```{R}
+mean(wts$weight)
+```
+### Spread
+
+- variability of the data
+
+#### `sample variance`
+
+$$
+s^2=\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2
+$$
+```{R}
+var(wts$weight)
+```
+
+#### Sample `standard deviation`
+
+$$
+\sqrt{s^2}=\sqrt{\frac{1}{n-1}\sum_{i}(x_i-\bar{x})^2}
+$$
+
+```{R}
+sd(hipcost, na.rm=TRUE)
+```
+
+#### `z-score`
+
+- deviations, $d_i=x_i-\bar{x}$, express data relative to its centre, rather than absolute
+$$
+z-score=\frac{x_i-\bar{x}}{s}
+$$
+gives the size of the data point in terms of its relative position to centre on a scale of standard deviations, so z-score of 3 means the data point is 3sd larger than mean
+
+#### defining function
+```{R}
+z_score <- function(x)(x-mean(x))/sd(x)
+```
+
+```{R}
+z_score(wts$weight)
+```
+
+Example 
+
+Prof scales on z-scores and those who have z-score value of greater than 1.28, get an A
+
+```{R}
+x <- c(54, 50, 79, 79, 51, 69, 55, 62, 100, 80)
+z <- (x-mean(x))/sd(x)
+x[z >= 1.28]
+```
+
+what score is just good enough for an A?
+
+```{R}
+mean(x) + 1.28 * sd(x)
+```
+
+- formula reverses the z-score formula is read as the score which is 1.28 SD above the mean
+- z-score allow datasets with different scales to be compared
+
+### Shape (distribution)
+
+- normal
+
+## categorical data
+
+
+```{R}
+x <- babies$smoke
+x <- factor(x, labels=c("never", "now", "until current", "once, quit", "unknown" ))
+table(x)
+```
+
+```{R}
+out <- table(x)
+prop <- 100 * out / sum(out)
+round(prop, digits = 2)
+```
+
+<!--chapter:end:02-univariate.Rmd-->
+
+# Bivariate Data
+
+```{r}
+fat
+```
+
+
+```{R}
+names(fat)
+```
+## Correlation
+
+p.106
+
+- `correlation` is a numeric summary of how closely related are the measures of two numeric variables when they are in a linear relationship.
+- perfect correlation would mean data on a straight line;
+- no correlation means values are scattered
+
+```{R}
+plot(fat$wrist, fat$neck)
+```
+
+or
+
+`plot(neck ~ wrist, data = fat)`
+
+To investigate `correlation`, shift centre of scatter plot to the mean of `x` variable and the mean of `y` variable and add `abline` and `point` functions
+- plot below separates the data into 4 quadrants as determined by points that are above and below the mean of all `x` values and those above and below the mean of all `y` values
+
+```{R}
+x <- fat$wrist[1:20]; y <- fat$neck[1:20]                      # data
+plot(x, y, main = "Neck by Wrist")            
+abline(v = mean(x), lty=2)                                     # dashed vertical line
+abline(h = mean(y), lty=2)                                     # dashed horizontal line
+points(mean(x), mean(y), pch=16, cex=4, col=rgb(0,0,0, .25))  
+```
+- correlated data shows in opposite regions (bottom left and top right)
+
+### covariance
+
+$$
+cov(x,y)=\frac{1}{n-1}\sum(x_i-\bar{x})(y_i-\bar{y})
+$$
+
+
+### `Pearson correlation coefficient`
+
+- uses `z-score` instead of deviations...
+
+$$
+cor(x,y)=\frac{1}{n-1}\sum\frac{(x_i-\bar{x})}{s_x}\frac{(y_i-\bar{y})}{s_y}=cov(x,y)/(s_xs_y)
+$$
+
+- formula is symmetric, so `x` and `y` can have order switched
+- using `z-score` removes the effect of spread and centre by standardizing
+
+#### `cov` and `cor` functions
+
+```{R}
+cor(fat$wrist, fat$neck)    # strongly correlated
+
+cor(fat$wrist, fat$height)  # mildly correlated
+
+cor(fat$age, fat$ankle)     # basically uncorrelated
+```
+
+### `Spearman correlation coefficient`
+
+- `Pearson` measures the strength of linear ralationship
+
+```{R}
+cor(Animals$body, Animals$brain)
+```
+
+- very low correlation...
+
+```{R}
+
+plot(Animals$body, Animals$brain)
+```
+
+```{R}
+body <- Animals$body; brain <- Animals$brain
+cross_prods <- (body - mean(body)) * (brain - mean(brain))
+Animals[cross_prods < 0, ]
+```
+- brachiosaurus is a huge outlier...
+- so, rank the data
+
+```{R}
+cor(rank(body), rank(brain))
+```
+
+or
+
+```{R}
+cor(body, brain, method="spearman")
+```
+
+#### correlation with replication
+
+```{R}
+cor(ToothGrowth$dose, ToothGrowth$len)
+```
+- positive correlation
+- for each dosage there are several experimental units
+-split data into 3 groups and then compute the correlation for these dosage values and the group averages
+
+```{R}
+l <- split(ToothGrowth$len, ToothGrowth$dose)
+group_means <- c(mean(l[[1]]), mean(l[[2]]), mean(l[[3]]))
+cor(c(0.5, 1, 2), group_means)
+```
+
+- 0.95 for aggregated data is higher than 0.8 for individual data. In general, correlations formed from averages are typically closer to 1 or -1.
+
+#### correlation v causation
+
+- what is the relationship between average teacher pay and SAT scores?
+
+```{R}
+cor(SAT$salary, SAT$total)
+```
+
+```{R}
+plot(SAT$salary, SAT$total)
+```
+
+```{R}
+plot(total~salary, SAT)
+points(total~salary, SAT, subset = perc < 10, pch=15)  # square
+points(total ~ salary, SAT, subset = perc > 40, pch=16) #solid
+```
+- shows correlation for each subgroup is positive
+
+```{R}
+total <- SAT$total; salary <- SAT$salary; perc <- SAT$perc
+less_10 <- perc < 10
+more_40 <- perc > 40
+between <- !less_10 & !more_40
+c(less = cor(total[less_10], salary[less_10]),
+  between = cor(total[between], salary[between]),
+  more = cor(total[more_40], salary[more_40]))
+```
+
+- all correlations are positive for subgroups, yet overall correlation is negative, called `Simpson's paradox` where some trend that exists for subgroups disappears when data are aggregated
+
+## Trends
+
+```{R}
+plot(len ~ dose, data=ToothGrowth, pch=16, col=rgb(0,0,0, .25))
+points(c(0.5, 1, 2), group_means, cex=1.5, pch=18)
+lines(c(0.5, 1, 2), group_means)
+```
+
+- summarize a relationship between two numeric variables
+- model for a linear trend can be specified as follows:
+> The mean response value depends linearly on the predictor value.
+
+$$
+\mu_{y|x}=\beta_0+\beta_1x 
+$$
+where $\mu_{y|x}$ means the mean of the response variable for a specified value of the predictor $x$
+
+- for individual data points this becomes
+$$
+y_i=\beta_0+\beta_1x_i+\epsilon_i 
+$$
+where $\epsilon_i$ are the error terms
+- we make assumptions about $\epsilon_i$, that on average, the values of $\epsilon_i$ are 0
+
+### `lm` function
+
+```{R}
+res <- lm(maxrate ~ age, data=heartrate)
+res
+```
+Visualizing the regression line
+
+```{R}
+plot(maxrate ~ age, data=heartrate)
+abline(res)
+```
+
+
+## Bivariate Categorical Data
+
+p132
+
+- usually presented in form of a `two-way contingency table`
+- count occurrences of each possible pair of levels and place frequencies on a grid
+- then compare rows and columns
+
+### Summarized data
+
+- create tables in R with `rbind`or `cbind`
+
+```{r}
+rbind(c(56,8), c(2,16)) # bind as rows
+```
+
+```{r}
+cbind(c(56,2), c(8,16)) # bind as columns
+```
+ - can also use `matrix`
+ 
+```{r}
+seatbelts <- matrix(c(56, 2, 8, 16), nrow=2)
+seatbelts
+```
+
+<!--
+```{r}
+edit(seatbelts)
+```
+-->
+
+```{r}
+rownames(seatbelts) <- c("buckled", "unbuckled")
+colnames(seatbelts) <- c("buckled", "unbuckled")
+seatbelts
+```
+
+### Unsummarized data
+
+p134
+
+```{r}
+headtail(grades, k=3)
+```
+```{r}
+table(grades)
+```
+
+## Marginal distributions of two-way tables
+p135
+
+- distribution of each variable is called `marginal distribution`
+- marginal distributions can be found by summing down the rows or columns with `margin.table`
+
+```{r}
+dimnames(seatbelts) <- list(parent=c("Buckled", "unbuckled"),
+                            child=c("buckled", "unbuckled"))
+seatbelts
+```
+
+```{r}
+margin.table(seatbelts, margin=1)  # 1 is for rows
+```
+
+```{r}
+margin.table(seatbelts, margin=2)  # 2 is for columns
+```
+
+`addmargins` will return marginal distributions by extending the table
+
+```{r}
+addmargins(seatbelts)
+```
+
+```{r}
+tbl <- with(grades, table(prev, grade))
+margin.table(tbl, 1)
+```
+
+```{r}
+margin.table(tbl, 2)
+```
+
+### Conditional distributions of two-way tables
+
+- comparing rows of a two-way table
+  - does a previous grade influence a grade
+  
+```{r}
+prop.table(tbl, margin=1) * 100
+```
+
+- comparing rows shows that previous grade has a strong influence on the current grade
+
+### `xtabs` function
+
+- althernative to `table`, where the structure of the table is specified with a model formula
+
+```{r}
+headtail(Fingerprints)
+```
+
+```{r}
+xtabs(count ~ Whorls + Loops, Fingerprints)
+```
+
+### `ftable`
+
+- flattens contingency tables
+
+```{r}
+tbl <- xtabs( ~ Origin + Type + Passengers, Cars93)
+ftable(tbl, row.vars=2, col.vars=c(1,3))
+```
+
+## Graphical summaries of two-way contingency tables
+
+p.140
+
+- bar plots as with numerical data
+
+### Mosaic plots
+
+- suitable for viewing relationships between two or more categorical variables
+
+```{r}
+titanic <- as.data.frame(Titanic)
+xtabs(Freq ~ Survived + Class, data=titanic, subset=Sex=="Female")
+```
+- need to convert `Titanic` to a dataframe as it was a contingency table and `xtabs` displays tabular data
+
+```{r}
+tbl <- xtabs(Freq ~ Sex, titanic)
+mosaicplot(tbl)
+```
+
+```{r}
+tbl <- xtabs(Freq ~ Sex + Survived, titanic)
+mosaicplot(tbl)
+```
+```{r}
+tbl <- xtabs(Freq ~ Sex + Survived + Class, titanic)
+mosaicplot(tbl)
+```
+
+## Measures of association for categorical data
+
+p.143
+
+```{r}
+mosaicplot(xtabs(Freq ~ Survived + Class, titanic))
+```
+
+Segmentation of the `survived` variable by `class` is different showing they are "correlated" - the value of one depends on the other.
+- Pearson's correlation is for numerical data but these are categorical
+-the variables `class` and `survived` are not numeric but they are naturally ordered
+- to make ordered factors out of the data.
+
+```{r}
+survived <- rep(titanic$Survived, titanic$Freq)
+survivied <- ordered(survived)
+class <- rep(titanic$Class, titanic$Freq)
+class <- ordered(class)
+head(class)
+```
+
+- That the levels are ordered is indicated with `<` above
+- now we can coerce them into numeric data with `as.numeric` and calculate `correlation`
+
+```{r}
+cor(as.numeric(survived), as.numeric(class), method="kendall")
+```
+
+- negative correlation is due to the ordering of class with `1st` being a 1 and `crew` being a 4
+
+### Kendall $\tau$ 
+
+
+<!--chapter:end:03-bivariate.Rmd-->
+
+# Footnotes and citations 
+
+## Footnotes
+
+Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
+
+## Citations
+
+Reference items in your bibliography file(s) using `@key`.
+
+For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
+Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+
+<!--chapter:end:04-citations.Rmd-->
+
+# Blocks
+
+## Equations
+
+Here is an equation.
+
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation} 
+
+You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
+
+
+## Theorems and proofs
+
+Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
+
+::: {.theorem #tri}
+For a right triangle, if $c$ denotes the *length* of the hypotenuse
+and $a$ and $b$ denote the lengths of the **other** two sides, we have
+$$a^2 + b^2 = c^2$$
+:::
+
+Read more here <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html>.
+
+## Callout blocks
+
+
+The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
+
+<!--chapter:end:05-blocks.Rmd-->
+
+# Sharing your book
+
+## Publishing
+
+HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
+
+## 404 pages
+
+By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a `_404.Rmd` or `_404.md` file to your project root and use code and/or Markdown syntax.
+
+## Metadata for sharing
+
+Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the `index.Rmd` YAML. To setup, set the `url` for your book and the path to your `cover-image` file. Your book's `title` and `description` are also used.
+
+
+
+This `gitbook` uses the same social sharing data across all chapters in your book- all links shared will look the same.
+
+Specify your book's source repository on GitHub using the `edit` key under the configuration options in the `_output.yml` file, which allows users to suggest an edit by linking to a chapter's source file. 
+
+Read more about the features of this output format here:
+
+https://pkgs.rstudio.com/bookdown/reference/gitbook.html
+
+Or use:
+
+```{r eval=FALSE}
+?bookdown::gitbook
+```
+
+
+
+<!--chapter:end:06-share.Rmd-->
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:07-references.Rmd-->
+
